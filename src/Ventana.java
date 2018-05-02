@@ -10,15 +10,6 @@ import java.net.URL;
 public class Ventana extends JFrame {
 	private JTextField tfPotencia;
 	private Coche c;
-	private boolean poderAnadir = false;
-
-	public boolean isPoderAnadir() {
-		return poderAnadir;
-	}
-
-	public void setPoderAnadir(boolean poderAnadir) {
-		this.poderAnadir = poderAnadir;
-	}
 
 	public Ventana() {
 		ImageIcon img = new ImageIcon("deusto.png");
@@ -66,8 +57,8 @@ public class Ventana extends JFrame {
 		ActionListener cbActionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				String s = (String) comboBox.getSelectedItem();// get the selected item
-				switch (s) {// check for a match
+				String s = (String) comboBox.getSelectedItem();
+				switch (s) {
 				case "BMW":
 					comboBox_1.setEnabled(true);
 					icMarca.setIcon(new ImageIcon("bmw.png"));
@@ -87,8 +78,8 @@ public class Ventana extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String s = (String) comboBox_1.getSelectedItem();// get the selected item
-				switch (s) {// check for a match
+				String s = (String) comboBox_1.getSelectedItem();
+				switch (s) {
 				case "A1":
 					icModelo.setIcon(new ImageIcon("a1ok.png"));
 					icModelo.setEnabled(true);

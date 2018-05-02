@@ -90,7 +90,7 @@ public class Moto extends Vehiculo {
 	}
 /**Ahora, para no hacer un for encima de otro continuamente para ir
  * verificando si la moto cumple todas las características para venderse en
- * el concesionario, hacemos un "Generate hashCode and equals" para ver si
+ * el concesionario, hacemos un "Generate hashCode and equals"  y un check para ver si
  * cada elemento del array de motos cumple todo. 
  */
 	@Override
@@ -119,6 +119,14 @@ public class Moto extends Vehiculo {
 		if (peso != other.peso)
 			return false;
 		return true;
+	}
+	public static boolean check(Moto m) {
+		for(int i = 0; i< Moto.motos.size(); i++) {
+			if(m.equals(Moto.motos.get(i))) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

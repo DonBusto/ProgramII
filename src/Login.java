@@ -11,7 +11,6 @@ public class Login extends JFrame {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private final JPanel panel_2 = new JPanel();
-
 	@SuppressWarnings("deprecation")
 	public Login() {
 		setTitle("Inicio de sesión");
@@ -63,6 +62,7 @@ public class Login extends JFrame {
 		btnCoches.addActionListener(cochesAl);
 		JButton btnMotos = new JButton("Motos");
 		panel_4.add(btnMotos);
+		btnMotos.addActionListener(motosAl);
 
 		ActionListener login = new ActionListener() {
 
@@ -111,6 +111,8 @@ public class Login extends JFrame {
 		public void actionPerformed(ActionEvent arg0) {
 			Ventana vc = new Ventana();
 			VentanaAdmin vAd = new VentanaAdmin();
+			ImageIcon img = new ImageIcon("deusto_COCHES.png");
+			vAd.setIconImage(img.getImage());
 			vAd.setTitle("Opción de añadir coche");
 			vAd.setBounds(500, 500, 230, 300);
 			if(admin==true) {
@@ -129,7 +131,23 @@ public class Login extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			
+			VentanaMotos vm = new VentanaMotos();
+			VentAdminMotos vAdM = new VentAdminMotos();
+			ImageIcon img = new ImageIcon("deusto_MOTOS.png");
+			vAdM.setIconImage(img.getImage());
+			vAdM.setTitle("Opción de añadir moto");
+			vAdM.setResizable(false);
+			vAdM.setBounds(500, 500, 230, 300);
+			if(admin==true) {
+				vAdM.setVisible(true);
+			}else {
+				vAdM.setVisible(false);
+			}
+			vm.setTitle("Consultorio de motos");
+			vm.setSize(700, 350);
+			vm.setResizable(false);
+			vm.setVisible(true);
+			setVisible(false);
 		}
 	};
 }
