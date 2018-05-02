@@ -74,15 +74,24 @@ public class Login extends JFrame {
 					tipoUsuario.setVisible(true);
 				} else {
 					if ((textField.getText().equals("jorge")) && (passwordField.getText().equals("1234"))) {
+						admin = true;
 						System.out.println(passwordField.getText());
 						tipoUsuario.setText("Eres administrador del concesionario.");
 						tipoUsuario.setVisible(true);
 						panel_4.setVisible(true);
 
 					} else {
-						tipoUsuario.setText("Eres cliente del concesionario.");
+						if ((textField.getText().equals("eguiluz")) && (passwordField.getText().equals("4321"))) {
+							admin = false;
+							System.out.println(passwordField.getText());
+							tipoUsuario.setText("Eres cliente del concesionario.");
+							tipoUsuario.setVisible(true);
+							panel_4.setVisible(true);
+					} else {
+						tipoUsuario.setText("No eres cliente del concesionario.");
+						panel_4.setVisible(false);
 						tipoUsuario.setVisible(true);
-						panel_4.setVisible(true);
+					}
 					}
 				}
 			}
@@ -98,17 +107,23 @@ public class Login extends JFrame {
 	}
 
 	ActionListener cochesAl = new ActionListener() {
-
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			Ventana vc = new Ventana();
+			VentanaAdmin vAd = new VentanaAdmin();
+			vAd.setTitle("Opción de añadir coche");
+			vAd.setBounds(500, 500, 230, 300);
+			if(admin==true) {
+				vAd.setVisible(true);
+			}else {
+				vAd.setVisible(false);
+			}
 			vc.setTitle("Consultorio de coches");
-			vc.setSize(700, 320);
+			vc.setSize(700, 350);
 			vc.setResizable(false);
 			vc.setVisible(true);
 			setVisible(false);
 		}
-		
 	};
 	ActionListener motosAl = new ActionListener() {
 
@@ -116,8 +131,5 @@ public class Login extends JFrame {
 		public void actionPerformed(ActionEvent arg0) {
 			
 		}
-		
 	};
-	
-
 }

@@ -131,7 +131,8 @@ public class Coche extends Vehiculo {
 	}
 	/**Ahora, para no hacer un for encima de otro continuamente para ir
 	 * verificando si el coche cumple todas las características para venderse en
-	 * el concesionario, hacemos un "Generate hashCode and equals" para ver si
+	 * el concesionario, hacemos un "Generate hashCode and equals" y posteriormente un
+	 * boolean "check" para ver si
 	 * cada elemento del array de coches cumple todo. 
 	 */
 	@Override

@@ -1,17 +1,28 @@
 import javax.swing.*;
 import java.awt.BorderLayout;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 public class Ventana extends JFrame {
 	private JTextField tfPotencia;
 	private Coche c;
-	Login l;
+	private boolean poderAnadir = false;
+
+	public boolean isPoderAnadir() {
+		return poderAnadir;
+	}
+
+	public void setPoderAnadir(boolean poderAnadir) {
+		this.poderAnadir = poderAnadir;
+	}
 
 	public Ventana() {
 		ImageIcon img = new ImageIcon("deusto.png");
 		setIconImage(img.getImage());
-
 		JPanel panel = new JPanel();
 
 		getContentPane().add(panel, BorderLayout.NORTH);
@@ -162,7 +173,7 @@ public class Ventana extends JFrame {
 		JPanel panel_12 = new JPanel();
 		panel_13.add(panel_12);
 
-		JButton btnComprobar = new JButton("Comprobar");
+		final JButton btnComprobar = new JButton("Comprobar");
 
 		panel_12.add(btnComprobar);
 
@@ -173,17 +184,77 @@ public class Ventana extends JFrame {
 		final JLabel lblElCocheNo = new JLabel("El coche no existe.");
 		lblElCocheNo.setVisible(false);
 		panel_13.add(lblElCocheNo);
+		
+		final JButton btnWeb = new JButton("Visitar p\u00E1gina web");
+		btnWeb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if((comboBox_1.getSelectedItem().toString()).equals("Serie3")){
+					try {
+						Desktop.getDesktop().browse(new URL("http://www.bmw.es/es/coches-bmw/serie-3.html").toURI());
+					} catch (IOException | URISyntaxException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				if ((comboBox_1.getSelectedItem().toString()).equals("Serie5")) {
+					try {
+						Desktop.getDesktop().browse(new URL("http://www.bmw.es/es/coches-bmw/serie-5.html").toURI());
+					} catch (IOException | URISyntaxException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				if ((comboBox_1.getSelectedItem().toString()).equals("Serie7")) {
+					try {
+						Desktop.getDesktop().browse(new URL("http://www.bmw.es/es/coches-bmw/serie-7.html").toURI());
+					} catch (IOException | URISyntaxException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				if ((comboBox_1.getSelectedItem().toString()).equals("A1")) {
+					try {
+						Desktop.getDesktop().browse(new URL("http://www.audi.es/es/web/es/modelos/a1/a1/exterior.html").toURI());
+					} catch (IOException | URISyntaxException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				if ((comboBox_1.getSelectedItem().toString()).equals("A4")) {
+					try {
+						Desktop.getDesktop().browse(new URL("https://www.audi.es/es/web/es/modelos/a4/a4.html").toURI());
+					} catch (IOException | URISyntaxException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				if ((comboBox_1.getSelectedItem().toString()).equals("A8")) {
+					try {
+						Desktop.getDesktop().browse(new URL("http://www.audi.es/es/web/es/modelos/a8/nuevo-audi-a8.html").toURI());
+					} catch (IOException | URISyntaxException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+		
+		btnWeb.setVisible(false);
+		panel_13.add(btnWeb);
 
 		System.out.println(comboBox.getSelectedItem().toString());
 		JPanel panel_11 = new JPanel();
 		panel_2.add(panel_11);
+			
+
 		ActionListener comprobar = new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					c = new Coche((comboBox.getSelectedItem().toString()), (comboBox_1.getSelectedItem().toString()),
-							Integer.parseInt(tfPotencia.getText()), Integer.parseInt(cbPuertas.getSelectedItem().toString()),
+							Integer.parseInt(tfPotencia.getText()),
+							Integer.parseInt(cbPuertas.getSelectedItem().toString()),
 							Integer.parseInt(cbPlazas.getSelectedItem().toString()), chckbxGps.isSelected(),
 							chckbxLneaDeportiva.isSelected());
 				} catch (NullPointerException e) {
@@ -196,6 +267,7 @@ public class Ventana extends JFrame {
 					lblElCocheNo.setEnabled(true);
 				} else {
 					lblElCocheNo.setText("El coche no existe.");
+					btnWeb.setVisible(false);
 					lblElCocheNo.setVisible(true);
 					btnCalcularPrecioFinal.setEnabled(false);
 				}
@@ -204,14 +276,13 @@ public class Ventana extends JFrame {
 		};
 		btnComprobar.addActionListener(comprobar);
 		ActionListener precioFinal = new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				lblElCocheNo.setText("El precio final es de " + c.precioFinal() + " euros.");
+				btnWeb.setVisible(true);
 			}
 		};
 		btnCalcularPrecioFinal.addActionListener(precioFinal);
-	}
+		};
 	
-
 }
