@@ -76,6 +76,7 @@ public class Coche extends Vehiculo {
 					boolean lineaDeporArray = Boolean.parseBoolean(dataSplit[6]);
 					Coche c = new Coche(dataSplit[0], dataSplit[1], potenciaArray, puertasArray, plazasArray, gpsArray,
 							lineaDeporArray);
+					System.out.println("Catálogo: ");
 					System.out.println(" Marca: " + dataSplit[0] + " Modelo: " + dataSplit[1] + " Potencia: "
 							+ potenciaArray + " Puertas: " + puertasArray + " Plazas: " + plazasArray + " GPS: "
 							+ gpsArray + " Línea deportiva: " + lineaDeporArray);

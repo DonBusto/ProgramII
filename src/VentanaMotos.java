@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
@@ -7,11 +6,12 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-public class Ventana extends JFrame {
-	private JTextField tfPotencia;
-	private Coche c;
+import javax.swing.*;
 
-	public Ventana() {
+public class VentanaMotos extends JFrame {
+	private JTextField tfPotencia;
+	private Moto m;
+	public VentanaMotos() {
 		ImageIcon img = new ImageIcon("deusto.png");
 		setIconImage(img.getImage());
 		JPanel panel = new JPanel();
@@ -38,7 +38,7 @@ public class Ventana extends JFrame {
 		panel_4.add(lblMarca);
 
 		final JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] { "BMW", "Audi" }));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Kawasaki", "Suzuki" }));
 		panel_4.add(comboBox);
 
 		final JLabel icMarca = new JLabel("");
@@ -57,19 +57,19 @@ public class Ventana extends JFrame {
 		ActionListener cbActionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				String s = (String) comboBox.getSelectedItem();
-				switch (s) {
-				case "BMW":
+				String s = (String) comboBox.getSelectedItem();// get the selected item
+				switch (s) {// check for a match
+				case "Kawasaki":
 					comboBox_1.setEnabled(true);
-					icMarca.setIcon(new ImageIcon("bmw.png"));
+					icMarca.setIcon(new ImageIcon("kawasaki.png"));
 					icMarca.setEnabled(true);
-					comboBox_1.setModel(new DefaultComboBoxModel(new String[] { "Serie3", "Serie5", "Serie7" }));
+					comboBox_1.setModel(new DefaultComboBoxModel(new String[] { "1400GTR", "J125ABS", "KX250F" }));
 					break;
-				case "Audi":
+				case "Suzuki":
 					comboBox_1.setEnabled(true);
-					icMarca.setIcon(new ImageIcon("audi.png"));
+					icMarca.setIcon(new ImageIcon("suzuki.png"));
 					icMarca.setEnabled(true);
-					comboBox_1.setModel(new DefaultComboBoxModel(new String[] { "A1", "A4", "A8" }));
+					comboBox_1.setModel(new DefaultComboBoxModel(new String[] { "Address", "Burgman", "IntruderC800" }));
 				}
 			};
 		};
@@ -80,28 +80,28 @@ public class Ventana extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				String s = (String) comboBox_1.getSelectedItem();
 				switch (s) {
-				case "A1":
-					icModelo.setIcon(new ImageIcon("a1ok.png"));
+				case "Address":
+					icModelo.setIcon(new ImageIcon("address.png"));
 					icModelo.setEnabled(true);
 					break;
-				case "A4":
-					icModelo.setIcon(new ImageIcon("A4.png"));
+				case "Burgman":
+					icModelo.setIcon(new ImageIcon("burgman.png"));
 					icModelo.setEnabled(true);
 					break;
-				case "A8":
-					icModelo.setIcon(new ImageIcon("A8.png"));
+				case "IntruderC800":
+					icModelo.setIcon(new ImageIcon("intruder.png"));
 					icModelo.setEnabled(true);
 					break;
-				case "Serie3":
-					icModelo.setIcon(new ImageIcon("serie3.png"));
+				case "1400GTR":
+					icModelo.setIcon(new ImageIcon("1400gtr.png"));
 					icModelo.setEnabled(true);
 					break;
-				case "Serie5":
-					icModelo.setIcon(new ImageIcon("serie5.png"));
+				case "J125ABS":
+					icModelo.setIcon(new ImageIcon("j125.png"));
 					icModelo.setEnabled(true);
 					break;
-				case "Serie7":
-					icModelo.setIcon(new ImageIcon("serie7.png"));
+				case "KX250F":
+					icModelo.setIcon(new ImageIcon("kx250f.png"));
 					icModelo.setEnabled(true);
 					break;
 				}
@@ -131,28 +131,26 @@ public class Ventana extends JFrame {
 		JPanel panel_8 = new JPanel();
 		panel_7.add(panel_8);
 
-		JLabel lblNewLabel = new JLabel("Puertas: ");
+		JLabel lblNewLabel = new JLabel("Cilindrada: ");
 		panel_8.add(lblNewLabel);
 
-		final JComboBox cbPuertas = new JComboBox();
-		cbPuertas.setModel(new DefaultComboBoxModel(new String[] { "3", "5" }));
-		panel_8.add(cbPuertas);
+		final JTextField tfCilindrada = new JTextField();
+		panel_8.add(tfCilindrada);
+		tfCilindrada.setColumns(4);
 
 		JPanel panel_10 = new JPanel();
 		panel_7.add(panel_10);
 
-		JLabel lblPlazas = new JLabel("Plazas: ");
+		JLabel lblPlazas = new JLabel("Peso: ");
 		panel_10.add(lblPlazas);
 
-		final JComboBox cbPlazas = new JComboBox();
-		cbPlazas.setModel(new DefaultComboBoxModel(new String[] { "2", "5", "7" }));
-		panel_10.add(cbPlazas);
-
-		final JCheckBox chckbxGps = new JCheckBox("GPS");
-		panel_7.add(chckbxGps);
-
-		final JCheckBox chckbxLneaDeportiva = new JCheckBox("L\u00EDnea deportiva");
-		panel_7.add(chckbxLneaDeportiva);
+		final JTextField tfPeso = new JTextField();
+		tfPeso.setColumns(3);
+		panel_10.add(tfPeso);
+		tfCilindrada.setColumns(3);
+		
+		final JCheckBox chckbxEqMusica = new JCheckBox("Equipo de música");
+		panel_7.add(chckbxEqMusica);
 
 		JPanel panel_9 = new JPanel();
 		panel_2.add(panel_9);
@@ -179,49 +177,49 @@ public class Ventana extends JFrame {
 		final JButton btnWeb = new JButton("Visitar p\u00E1gina web");
 		btnWeb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if((comboBox_1.getSelectedItem().toString()).equals("Serie3")){
+				if((comboBox_1.getSelectedItem().toString()).equals("1400GTR")){
 					try {
-						Desktop.getDesktop().browse(new URL("http://www.bmw.es/es/coches-bmw/serie-3.html").toURI());
+						Desktop.getDesktop().browse(new URL("https://www.kawasaki.es/es/products/Sport_Tourer/2016/1400GTR/overview?Uid=0821DQxdXFpYCl1aWl9dXFpbWwleXAlQDFBbXwkOWVlYDVo").toURI());
 					} catch (IOException | URISyntaxException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
-				if ((comboBox_1.getSelectedItem().toString()).equals("Serie5")) {
+				if ((comboBox_1.getSelectedItem().toString()).equals("J125ABS")) {
 					try {
-						Desktop.getDesktop().browse(new URL("http://www.bmw.es/es/coches-bmw/serie-5.html").toURI());
+						Desktop.getDesktop().browse(new URL("https://www.kawasaki.es/es/products/Scooter/2017/J125/overview?Uid=0960DlELDVheDQ4LWVteXAlRCgpcXFxeDA0JDV5RDlsKUV0").toURI());
 					} catch (IOException | URISyntaxException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
-				if ((comboBox_1.getSelectedItem().toString()).equals("Serie7")) {
+				if ((comboBox_1.getSelectedItem().toString()).equals("KX250F")) {
 					try {
-						Desktop.getDesktop().browse(new URL("http://www.bmw.es/es/coches-bmw/serie-7.html").toURI());
+						Desktop.getDesktop().browse(new URL("https://www.kawasaki.es/es/products/Motocross/2018/KX250F/overview?Uid=08F2Dg4KUApRWA1eXQxRXA5ZDApdDVlaWgpZCQpaUVxfXFw").toURI());
 					} catch (IOException | URISyntaxException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
-				if ((comboBox_1.getSelectedItem().toString()).equals("A1")) {
+				if ((comboBox_1.getSelectedItem().toString()).equals("Address")) {
 					try {
-						Desktop.getDesktop().browse(new URL("http://www.audi.es/es/web/es/modelos/a1/a1/exterior.html").toURI());
+						Desktop.getDesktop().browse(new URL("https://moto.suzuki.es/motos/scooter/2018/address/ficha-tecnica/?ib_comercializa=1").toURI());
 					} catch (IOException | URISyntaxException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
-				if ((comboBox_1.getSelectedItem().toString()).equals("A4")) {
+				if ((comboBox_1.getSelectedItem().toString()).equals("Burgman")) {
 					try {
-						Desktop.getDesktop().browse(new URL("https://www.audi.es/es/web/es/modelos/a4/a4.html").toURI());
+						Desktop.getDesktop().browse(new URL("https://moto.suzuki.es/motos/scooter/2017/burgman-400/ficha-tecnica/?ib_comercializa=1").toURI());
 					} catch (IOException | URISyntaxException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
-				if ((comboBox_1.getSelectedItem().toString()).equals("A8")) {
+				if ((comboBox_1.getSelectedItem().toString()).equals("IntruderC800")) {
 					try {
-						Desktop.getDesktop().browse(new URL("http://www.audi.es/es/web/es/modelos/a8/nuevo-audi-a8.html").toURI());
+						Desktop.getDesktop().browse(new URL("https://moto.suzuki.es/motos/cruiser/2015/intruder-c800/ficha-tecnica/?ib_comercializa=1").toURI());
 					} catch (IOException | URISyntaxException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -243,21 +241,21 @@ public class Ventana extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					c = new Coche((comboBox.getSelectedItem().toString()), (comboBox_1.getSelectedItem().toString()),
+					m = new Moto((comboBox.getSelectedItem().toString()), (comboBox_1.getSelectedItem().toString()),
 							Integer.parseInt(tfPotencia.getText()),
-							Integer.parseInt(cbPuertas.getSelectedItem().toString()),
-							Integer.parseInt(cbPlazas.getSelectedItem().toString()), chckbxGps.isSelected(),
-							chckbxLneaDeportiva.isSelected());
+							Integer.parseInt(tfCilindrada.getText()),
+							Integer.parseInt(tfPeso.getText()),
+							chckbxEqMusica.isSelected());
 				} catch (NullPointerException e) {
 					e.printStackTrace();
 				}
-				if (Coche.check(c) == true) {
+				if (Moto.check(m) == true) {
 					btnCalcularPrecioFinal.setEnabled(true);
 					lblElCocheNo.setVisible(true);
-					lblElCocheNo.setText("El coche sí existe.");
+					lblElCocheNo.setText("La moto sí existe.");
 					lblElCocheNo.setEnabled(true);
 				} else {
-					lblElCocheNo.setText("El coche no existe.");
+					lblElCocheNo.setText("La moto no existe.");
 					btnWeb.setVisible(false);
 					lblElCocheNo.setVisible(true);
 					btnCalcularPrecioFinal.setEnabled(false);
@@ -269,11 +267,11 @@ public class Ventana extends JFrame {
 		ActionListener precioFinal = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				lblElCocheNo.setText("El precio final es de " + c.precioFinal() + " euros.");
+				lblElCocheNo.setText("El precio final es de " + m.precioFinal() + " euros.");
 				btnWeb.setVisible(true);
 			}
 		};
 		btnCalcularPrecioFinal.addActionListener(precioFinal);
 		};
-	
+
 }

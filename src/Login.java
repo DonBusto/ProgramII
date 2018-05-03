@@ -75,7 +75,7 @@ public class Login extends JFrame {
 				} else {
 					if ((textField.getText().equals("jorge")) && (passwordField.getText().equals("1234"))) {
 						admin = true;
-						System.out.println(passwordField.getText());
+//						System.out.println(passwordField.getText());
 						tipoUsuario.setText("Eres administrador del concesionario.");
 						tipoUsuario.setVisible(true);
 						panel_4.setVisible(true);
@@ -83,7 +83,7 @@ public class Login extends JFrame {
 					} else {
 						if ((textField.getText().equals("eguiluz")) && (passwordField.getText().equals("4321"))) {
 							admin = false;
-							System.out.println(passwordField.getText());
+//							System.out.println(passwordField.getText());
 							tipoUsuario.setText("Eres cliente del concesionario.");
 							tipoUsuario.setVisible(true);
 							panel_4.setVisible(true);
@@ -140,7 +140,7 @@ public class Login extends JFrame {
 			vAdM.setBounds(500, 500, 230, 300);
 			if(admin==true) {
 				vAdM.setVisible(true);
-			}else {
+			}else{
 				vAdM.setVisible(false);
 			}
 			vm.setTitle("Consultorio de motos");

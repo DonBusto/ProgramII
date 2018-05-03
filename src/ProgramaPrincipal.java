@@ -13,16 +13,16 @@ public class ProgramaPrincipal {
 		Coche.cargarCoches();
 		Moto.cargarMotos();
 		// System.out.println(Coche.coches.get(0).getMarca());
-		Coche c = new Coche("BMW", "Serie7", 230, 5, 5, true, true);
-		if (Coche.check(c) == true) {
-			System.out.println("El coche está en venta.");
-			/** Aquí podría poner un "¿desea calcular el precio?" pero prefiero hacerlo con
-			 *  los botones después
-			 */
-			System.out.println("El precio final es de " + c.precioFinal() + " euros.");
-		} else {
-			System.out.println("El coche no existe.");
-		}
+//		Coche c = new Coche("BMW", "Serie7", 230, 5, 5, true, true);
+//		if (Coche.check(c) == true) {
+//			System.out.println("El coche está en venta.");
+//			/** Aquí podría poner un "¿desea calcular el precio?" pero prefiero hacerlo con
+//			 *  los botones después
+//			 */
+//			System.out.println("El precio final es de " + c.precioFinal() + " euros.");
+//		} else {
+//			System.out.println("El coche no existe.");
+//		}
 		Login l = new Login();
 		ImageIcon img = new ImageIcon("deusto_LOGIN.png");
 		l.setIconImage(img.getImage());
