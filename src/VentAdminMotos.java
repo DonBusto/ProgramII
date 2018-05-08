@@ -11,6 +11,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class VentAdminMotos extends JFrame{
 	private JTextField tfPotencia;
@@ -85,6 +87,15 @@ public class VentAdminMotos extends JFrame{
 		getContentPane().add(lblPotencia, gbc_lblPotencia);
 
 		tfPotencia = new JTextField();
+		tfPotencia.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent evt) {
+				char c = evt.getKeyChar();
+				if(!(Character.isDigit(c)||(c == KeyEvent.VK_BACK_SPACE)||(c == KeyEvent.VK_DELETE))) {
+					evt.consume();
+				}
+			}
+		});
 		GridBagConstraints gbc_tfPotencia = new GridBagConstraints();
 		gbc_tfPotencia.insets = new Insets(0, 0, 5, 0);
 		gbc_tfPotencia.fill = GridBagConstraints.HORIZONTAL;

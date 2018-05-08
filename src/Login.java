@@ -36,14 +36,14 @@ public class Login extends JFrame {
 
 		textField = new JTextField();
 		panel_2.add(textField);
-		textField.setColumns(8);
+		textField.setColumns(6);
 
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a: ");
 		panel_2.add(lblContrasea);
 
 		passwordField = new JPasswordField();
 		panel_2.add(passwordField);
-		passwordField.setColumns(4);
+		passwordField.setColumns(6);
 
 		final JCheckBox chckbxAdmin = new JCheckBox("Admin");
 		panel_2.add(chckbxAdmin);

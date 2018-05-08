@@ -2,6 +2,8 @@ import java.awt.BorderLayout;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -10,8 +12,10 @@ import javax.swing.*;
 
 public class VentanaMotos extends JFrame {
 	private JTextField tfPotencia;
+	
 	private Moto m;
 	public VentanaMotos() {
+		
 		ImageIcon img = new ImageIcon("deusto.png");
 		setIconImage(img.getImage());
 		JPanel panel = new JPanel();
@@ -121,6 +125,15 @@ public class VentanaMotos extends JFrame {
 
 		tfPotencia = new JTextField();
 		panel_6.add(tfPotencia);
+		tfPotencia.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent evt) {
+				char c = evt.getKeyChar();
+				if(!(Character.isDigit(c)||(c == KeyEvent.VK_BACK_SPACE)||(c == KeyEvent.VK_DELETE))) {
+					evt.consume();
+				}
+			}
+		});
 		tfPotencia.setColumns(3);
 
 		JPanel panel_7 = new JPanel();

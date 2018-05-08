@@ -4,6 +4,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -89,6 +91,15 @@ public class VentanaAdmin extends JFrame {
 		gbc_tfPotencia.gridy = 2;
 		getContentPane().add(tfPotencia, gbc_tfPotencia);
 		tfPotencia.setColumns(10);
+		tfPotencia.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent evt) {
+				char c = evt.getKeyChar();
+				if(!(Character.isDigit(c)||(c == KeyEvent.VK_BACK_SPACE)||(c == KeyEvent.VK_DELETE))) {
+					evt.consume();
+				}
+			}
+		});
 
 		JLabel lblPuertas = new JLabel("Puertas: ");
 		GridBagConstraints gbc_lblPuertas = new GridBagConstraints();

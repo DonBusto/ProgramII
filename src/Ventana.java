@@ -3,6 +3,8 @@ import java.awt.BorderLayout;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -139,7 +141,16 @@ public class Ventana extends JFrame {
 		tfPotencia = new JTextField();
 		panel_6.add(tfPotencia);
 		tfPotencia.setColumns(3);
-
+		tfPotencia.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent evt) {
+				char c = evt.getKeyChar();
+				if(!(Character.isDigit(c)||(c == KeyEvent.VK_BACK_SPACE)||(c == KeyEvent.VK_DELETE))) {
+					evt.consume();
+				}
+			}
+		});
+		
 		JPanel panel_7 = new JPanel();
 		panel_2.add(panel_7);
 		panel_7.setSize(429, 33);
