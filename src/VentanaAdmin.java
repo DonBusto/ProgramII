@@ -14,11 +14,12 @@ public class VentanaAdmin extends JFrame {
 	private JTextField tfPotencia;
 
 	public VentanaAdmin() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		getContentPane().setLayout(gridBagLayout);
 
 		JLabel lblMarca = new JLabel("Marca: ");
@@ -137,40 +138,75 @@ public class VentanaAdmin extends JFrame {
 		gbc_chckbxLneaDeportiva.gridy = 5;
 		getContentPane().add(chckbxLneaDeportiva, gbc_chckbxLneaDeportiva);
 
+		final JLabel lblNoPuedesAadir = new JLabel("No puedes a\u00F1adir coches.");
+		GridBagConstraints gbc_lblNoPuedesAadir = new GridBagConstraints();
+		gbc_lblNoPuedesAadir.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNoPuedesAadir.anchor = GridBagConstraints.SOUTH;
+		gbc_lblNoPuedesAadir.gridx = 1;
+		gbc_lblNoPuedesAadir.gridy = 7;
+		getContentPane().add(lblNoPuedesAadir, gbc_lblNoPuedesAadir);
+		lblNoPuedesAadir.setVisible(false);
+
+		final JLabel lblNoEresAdministrador = new JLabel("No eres administrador.");
+		GridBagConstraints gbc_lblNoEresAdministrador = new GridBagConstraints();
+		gbc_lblNoEresAdministrador.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNoEresAdministrador.gridx = 1;
+		gbc_lblNoEresAdministrador.gridy = 8;
+		getContentPane().add(lblNoEresAdministrador, gbc_lblNoEresAdministrador);
+		lblNoEresAdministrador.setVisible(false);
+
+		final JLabel lblCierraLaVentana = new JLabel("Cierra la ventana.");
+		GridBagConstraints gbc_lblCierraLaVentana = new GridBagConstraints();
+		gbc_lblCierraLaVentana.gridx = 1;
+		gbc_lblCierraLaVentana.gridy = 9;
+		getContentPane().add(lblCierraLaVentana, gbc_lblCierraLaVentana);
+		lblCierraLaVentana.setVisible(false);
+
 		JButton btnAadirCoche = new JButton("A\u00F1adir coche");
 		GridBagConstraints gbc_btnAadirCoche = new GridBagConstraints();
+		gbc_btnAadirCoche.insets = new Insets(0, 0, 5, 0);
 		gbc_btnAadirCoche.gridx = 1;
 		gbc_btnAadirCoche.gridy = 6;
 		ActionListener anadirCoche = new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					File file = new File("coches.csv");
-					FileWriter writer = new FileWriter(file.getAbsoluteFile(), true); //este true del final nos permitirá escribir sobre el fichero a medida que vamos añadiendo coches nuevos.
-					BufferedWriter bw = new BufferedWriter(writer);
-					bw.write(String.valueOf(comboBox.getSelectedItem().toString()));
-					bw.write(';');
-					bw.write(String.valueOf(comboBox_1.getSelectedItem().toString()));
-					bw.write(';');
-					bw.write(String.valueOf(tfPotencia.getText()));
-					bw.write(';');
-					bw.write(String.valueOf(cbPuertas.getSelectedItem().toString()));
-					bw.write(';');
-					bw.write(String.valueOf(cbPlazas.getSelectedItem().toString()));
-					bw.write(';');
-					bw.write(String.valueOf(chckbxGps.isSelected()));
-					bw.write(';');
-					bw.write(String.valueOf(chckbxLneaDeportiva.isSelected()));
-					bw.write(';');
-					bw.write('\n');
-					bw.close();
-					Coche.cargarCoches(); //Volvemos a cargar los elementos del Arraylist
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
+				if (Login.isAdmin() == true) {
+					try {
+						File file = new File("coches.csv");
+						FileWriter writer = new FileWriter(file.getAbsoluteFile(), true); // este true del final nos
+																							// permitirá escribir sobre
+																							// el fichero a medida que
+																							// vamos añadiendo coches
+																							// nuevos.
+						BufferedWriter bw = new BufferedWriter(writer);
+						bw.write(String.valueOf(comboBox.getSelectedItem().toString()));
+						bw.write(';');
+						bw.write(String.valueOf(comboBox_1.getSelectedItem().toString()));
+						bw.write(';');
+						bw.write(String.valueOf(tfPotencia.getText()));
+						bw.write(';');
+						bw.write(String.valueOf(cbPuertas.getSelectedItem().toString()));
+						bw.write(';');
+						bw.write(String.valueOf(cbPlazas.getSelectedItem().toString()));
+						bw.write(';');
+						bw.write(String.valueOf(chckbxGps.isSelected()));
+						bw.write(';');
+						bw.write(String.valueOf(chckbxLneaDeportiva.isSelected()));
+						bw.write(';');
+						bw.write('\n');
+						bw.close();
+						Coche.cargarCoches(); // Volvemos a cargar los elementos del Arraylist
+					} catch (Exception e) {
+
+					}
+				} else {
+					setSize(337, 310);
+					lblCierraLaVentana.setVisible(true);
+					lblNoEresAdministrador.setVisible(true);
+					lblNoPuedesAadir.setVisible(true);
 				}
+
 			}
 
 		};

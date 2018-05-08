@@ -13,7 +13,7 @@ public class Coche extends Vehiculo {
 	private boolean gps;
 	private boolean lineaDeportiva;
 	public static ArrayList<Coche> coches = new ArrayList<Coche>();
-	
+
 	Coche(String marca, String modelo, int potencia, int puertas, int plazas, boolean gps, boolean lineaDeportiva) {
 		super(marca, modelo, potencia);
 		this.setPuertas(puertas);
@@ -86,7 +86,6 @@ public class Coche extends Vehiculo {
 
 			} catch (FileNotFoundException e) {
 
-				e.printStackTrace();
 			}
 		}
 	}
@@ -130,11 +129,12 @@ public class Coche extends Vehiculo {
 	public static void setCoches(ArrayList<Coche> coches) {
 		Coche.coches = coches;
 	}
-	/**Ahora, para no hacer un for encima de otro continuamente para ir
-	 * verificando si el coche cumple todas las características para venderse en
-	 * el concesionario, hacemos un "Generate hashCode and equals" y posteriormente un
-	 * boolean "check" para ver si
-	 * cada elemento del array de coches cumple todo. 
+
+	/**
+	 * Ahora, para no hacer un for encima de otro continuamente para ir verificando
+	 * si el coche cumple todas las características para venderse en el
+	 * concesionario, hacemos un "Generate hashCode and equals" y posteriormente un
+	 * boolean "check" para ver si cada elemento del array de coches cumple todo.
 	 */
 	@Override
 	public int hashCode() {
@@ -168,13 +168,12 @@ public class Coche extends Vehiculo {
 	}
 
 	/**
-	 * Comprueba si un coche dado existe en la lista
-	 * c es el Coche a comprobar
+	 * Comprueba si un coche dado existe en la lista c es el Coche a comprobar
 	 * Devuelve true si existe, false si no
 	 */
 	public static boolean check(Coche c) {
-		for(int i = 0; i< Coche.coches.size(); i++) {
-			if(c.equals(Coche.coches.get(i))) {
+		for (int i = 0; i < Coche.coches.size(); i++) {
+			if (c.equals(Coche.coches.get(i))) {
 				return true;
 			}
 		}

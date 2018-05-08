@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -19,9 +20,9 @@ public class VentAdminMotos extends JFrame{
 	public VentAdminMotos() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		getContentPane().setLayout(gridBagLayout);
 
 		JLabel lblMarca = new JLabel("Marca: ");
@@ -133,44 +134,79 @@ public class VentAdminMotos extends JFrame{
 		gbc_chckbxEqMusica.gridx = 1;
 		gbc_chckbxEqMusica.gridy = 5;
 		getContentPane().add(chckbxEqMusica, gbc_chckbxEqMusica);
-
+		
+		final JLabel lblNoEresAdministrador = new JLabel("No eres administrador.");
+		GridBagConstraints gbc_lblNoEresAdministrador = new GridBagConstraints();
+		gbc_lblNoEresAdministrador.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNoEresAdministrador.gridx = 1;
+		gbc_lblNoEresAdministrador.gridy = 7;
+		getContentPane().add(lblNoEresAdministrador, gbc_lblNoEresAdministrador);
+		lblNoEresAdministrador.setVisible(false);
+		
 		JButton btnAadirMoto = new JButton("A\u00F1adir moto");
 		GridBagConstraints gbc_btnAadirMoto = new GridBagConstraints();
+		gbc_btnAadirMoto.insets = new Insets(0, 0, 5, 0);
 		gbc_btnAadirMoto.gridx = 1;
 		gbc_btnAadirMoto.gridy = 6;
+		
+		final JLabel lblNoPuedesAadir = new JLabel("No puedes a\u00F1adir motos.");
+		GridBagConstraints gbc_lblNoPuedesAadir = new GridBagConstraints();
+		gbc_lblNoPuedesAadir.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNoPuedesAadir.gridx = 1;
+		gbc_lblNoPuedesAadir.gridy = 8;
+		lblNoPuedesAadir.setVisible(false);
+		getContentPane().add(lblNoPuedesAadir, gbc_lblNoPuedesAadir);
+		
+		final JLabel lblCierraLaVentana = new JLabel("Cierra la ventana.");
+		GridBagConstraints gbc_lblCierraLaVentana = new GridBagConstraints();
+		gbc_lblCierraLaVentana.gridx = 1;
+		gbc_lblCierraLaVentana.gridy = 9;
+		getContentPane().add(lblCierraLaVentana, gbc_lblCierraLaVentana);
+		lblCierraLaVentana.setVisible(false);
+		
 		ActionListener anadirMoto = new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					File file = new File("motos.csv");
-					FileWriter writer = new FileWriter(file.getAbsoluteFile(), true); //este true del final nos permitirá escribir sobre el fichero a medida que vamos añadiendo coches nuevos.
-					BufferedWriter bw = new BufferedWriter(writer);
-					bw.write(String.valueOf(comboBox.getSelectedItem().toString()));
-					bw.write(';');
-					bw.write(String.valueOf(comboBox_1.getSelectedItem().toString()));
-					bw.write(';');
-					bw.write(String.valueOf(tfPotencia.getText()));
-					bw.write(';');
-					bw.write(String.valueOf(tfCilindrada.getText()));
-					bw.write(';');
-					bw.write(String.valueOf(tfPeso.getText()));
-					bw.write(';');
-					bw.write(String.valueOf(chckbxEqMusica.isSelected()));
-					bw.write(';');
-					bw.write('\n');
-					bw.close();
-					Moto.cargarMotos(); //Volvemos a cargar los elementos del Arraylist
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
+				if (Login.isAdmin() == true) {
+					try {
+						File file = new File("motos.csv");
+						FileWriter writer = new FileWriter(file.getAbsoluteFile(), true); //este true del final nos permitirá escribir sobre el fichero a medida que vamos añadiendo coches nuevos.
+						BufferedWriter bw = new BufferedWriter(writer);
+						bw.write(String.valueOf(comboBox.getSelectedItem().toString()));
+						bw.write(';');
+						bw.write(String.valueOf(comboBox_1.getSelectedItem().toString()));
+						bw.write(';');
+						bw.write(String.valueOf(tfPotencia.getText()));
+						bw.write(';');
+						bw.write(String.valueOf(tfCilindrada.getText()));
+						bw.write(';');
+						bw.write(String.valueOf(tfPeso.getText()));
+						bw.write(';');
+						bw.write(String.valueOf(chckbxEqMusica.isSelected()));
+						bw.write(';');
+						bw.write('\n');
+						bw.close();
+						Moto.cargarMotos(); //Volvemos a cargar los elementos del Arraylist
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} else {
+					lblNoEresAdministrador.setVisible(true);
+					lblCierraLaVentana.setVisible(true);
+					lblNoPuedesAadir.setVisible(true);
 				}
+				
 			}
-
 		};
 		btnAadirMoto.addActionListener(anadirMoto);
 		getContentPane().add(btnAadirMoto, gbc_btnAadirMoto);
+		
+		
+		
+		
 
 	}
 }

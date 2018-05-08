@@ -17,6 +17,23 @@ public class Ventana extends JFrame {
 		JPanel panel = new JPanel();
 
 		getContentPane().add(panel, BorderLayout.NORTH);
+
+		JButton btnLogout = new JButton("Cerrar sesi\u00F3n");
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				Login l = new Login();
+				ImageIcon img = new ImageIcon("deusto_LOGIN.png");
+				l.setIconImage(img.getImage());
+				l.setResizable(false);
+				l.setSize(550, 80);
+				l.setAdmin(false);
+				l.setVisible(true);
+
+			}
+		});
+		btnLogout.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel.add(btnLogout);
 		panel.add(new JLabel(new ImageIcon("BANNER LQ.jpg")));
 
 		JPanel panel_1 = new JPanel();
@@ -175,11 +192,11 @@ public class Ventana extends JFrame {
 		final JLabel lblElCocheNo = new JLabel("El coche no existe.");
 		lblElCocheNo.setVisible(false);
 		panel_13.add(lblElCocheNo);
-		
+
 		final JButton btnWeb = new JButton("Visitar p\u00E1gina web");
 		btnWeb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if((comboBox_1.getSelectedItem().toString()).equals("Serie3")){
+				if ((comboBox_1.getSelectedItem().toString()).equals("Serie3")) {
 					try {
 						Desktop.getDesktop().browse(new URL("http://www.bmw.es/es/coches-bmw/serie-3.html").toURI());
 					} catch (IOException | URISyntaxException e1) {
@@ -205,7 +222,8 @@ public class Ventana extends JFrame {
 				}
 				if ((comboBox_1.getSelectedItem().toString()).equals("A1")) {
 					try {
-						Desktop.getDesktop().browse(new URL("http://www.audi.es/es/web/es/modelos/a1/a1/exterior.html").toURI());
+						Desktop.getDesktop()
+								.browse(new URL("http://www.audi.es/es/web/es/modelos/a1/a1/exterior.html").toURI());
 					} catch (IOException | URISyntaxException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -213,7 +231,8 @@ public class Ventana extends JFrame {
 				}
 				if ((comboBox_1.getSelectedItem().toString()).equals("A4")) {
 					try {
-						Desktop.getDesktop().browse(new URL("https://www.audi.es/es/web/es/modelos/a4/a4.html").toURI());
+						Desktop.getDesktop()
+								.browse(new URL("https://www.audi.es/es/web/es/modelos/a4/a4.html").toURI());
 					} catch (IOException | URISyntaxException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -221,7 +240,8 @@ public class Ventana extends JFrame {
 				}
 				if ((comboBox_1.getSelectedItem().toString()).equals("A8")) {
 					try {
-						Desktop.getDesktop().browse(new URL("http://www.audi.es/es/web/es/modelos/a8/nuevo-audi-a8.html").toURI());
+						Desktop.getDesktop()
+								.browse(new URL("http://www.audi.es/es/web/es/modelos/a8/nuevo-audi-a8.html").toURI());
 					} catch (IOException | URISyntaxException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -229,14 +249,13 @@ public class Ventana extends JFrame {
 				}
 			}
 		});
-		
+
 		btnWeb.setVisible(false);
 		panel_13.add(btnWeb);
 
-//		System.out.println(comboBox.getSelectedItem().toString());
+		// System.out.println(comboBox.getSelectedItem().toString());
 		JPanel panel_11 = new JPanel();
 		panel_2.add(panel_11);
-			
 
 		ActionListener comprobar = new ActionListener() {
 
@@ -248,8 +267,8 @@ public class Ventana extends JFrame {
 							Integer.parseInt(cbPuertas.getSelectedItem().toString()),
 							Integer.parseInt(cbPlazas.getSelectedItem().toString()), chckbxGps.isSelected(),
 							chckbxLneaDeportiva.isSelected());
-				} catch (NullPointerException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+
 				}
 				if (Coche.check(c) == true) {
 					btnCalcularPrecioFinal.setEnabled(true);
@@ -274,6 +293,15 @@ public class Ventana extends JFrame {
 			}
 		};
 		btnCalcularPrecioFinal.addActionListener(precioFinal);
-		};
-	
+	};
+
+	private class SwingAction extends AbstractAction {
+		public SwingAction() {
+			putValue(NAME, "SwingAction");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+
+		public void actionPerformed(ActionEvent e) {
+		}
+	}
 }

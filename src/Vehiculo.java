@@ -36,7 +36,7 @@ public class Vehiculo {
 	
 	public float precioPotencia(){
 		float precioPotencia = getPrecioBase();
-		if(potencia>0&&potencia<40){
+		if (potencia > 0 && potencia < 40){
 			precioPotencia+=250;
 		}
 		if(potencia>40&&potencia<80){

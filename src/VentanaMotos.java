@@ -231,9 +231,24 @@ public class VentanaMotos extends JFrame {
 		btnWeb.setVisible(false);
 		panel_13.add(btnWeb);
 
-//		System.out.println(comboBox.getSelectedItem().toString());
 		JPanel panel_11 = new JPanel();
 		panel_2.add(panel_11);
+		JButton btnLogout = new JButton("Cerrar sesi\u00F3n");
+		panel_11.add(btnLogout);
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				Login l = new Login();
+				ImageIcon img = new ImageIcon("deusto_LOGIN.png");
+				l.setIconImage(img.getImage());
+				l.setResizable(false);
+				l.setSize(550, 80);
+				l.setVisible(true);
+				l.setAdmin(false);				
+			}
+		});
+		btnLogout.setVisible(true);
+		btnLogout.setHorizontalAlignment(SwingConstants.RIGHT);
 			
 
 		ActionListener comprobar = new ActionListener() {
@@ -273,5 +288,6 @@ public class VentanaMotos extends JFrame {
 		};
 		btnCalcularPrecioFinal.addActionListener(precioFinal);
 		};
+	
 
 }
