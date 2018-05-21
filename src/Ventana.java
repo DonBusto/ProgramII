@@ -1,21 +1,72 @@
 import javax.swing.*;
+
 import java.awt.BorderLayout;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.security.KeyStore.Entry;
 import java.util.TimerTask;
+import java.util.Scanner;
+import java.util.Set;
 import java.util.Timer;
 
 public class Ventana extends JFrame {
+	public String marcaCB;
+	public String modeloCB;
 	private JTextField tfPotencia;
 	private Coche c;
+	final JComboBox<ObjetoCombobox> comboBox = new JComboBox<ObjetoCombobox>();
+	final JComboBox cbPuertas = new JComboBox();
+	final JComboBox cbPlazas = new JComboBox();
+
 	public Timer timer = new Timer();
 
+	public String getMarcaCB() {
+		return marcaCB;
+	}
+	public void setMarcaCB(String marcaCB) {
+		this.marcaCB = marcaCB;
+	}
+	public String getModeloCB() {
+		return modeloCB;
+	}
+	public void setModeloCB(String modeloCB) {
+		this.modeloCB = modeloCB;
+	}
+	public JTextField getTfPotencia() {
+		return tfPotencia;
+	}
+	public void setTfPotencia(JTextField tfPotencia) {
+		this.tfPotencia = tfPotencia;
+	}
+	public Coche getC() {
+		return c;
+	}
+	public void setC(Coche c) {
+		this.c = c;
+	}
+	public Timer getTimer() {
+		return timer;
+	}
+	public void setTimer(Timer timer) {
+		this.timer = timer;
+	}
+	public JComboBox<ObjetoCombobox> getComboBox() {
+		return comboBox;
+	}
+	public JComboBox getCbPuertas() {
+		return cbPuertas;
+	}
+	public JComboBox getCbPlazas() {
+		return cbPlazas;
+	}
 	public Ventana() {
 
 		ImageIcon img = new ImageIcon("deusto.png");
@@ -24,39 +75,39 @@ public class Ventana extends JFrame {
 		JPanel panel = new JPanel();
 
 		getContentPane().add(panel, BorderLayout.NORTH);
-		
-				JButton btnLogout = new JButton("Cerrar sesi\u00F3n");
-				btnLogout.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						dispose();
-						Login l = new Login();
-						ImageIcon img = new ImageIcon("deusto_LOGIN.png");
-						l.setIconImage(img.getImage());
-						l.setResizable(false);
-						l.setSize(550, 80);
-						l.setAdmin(false);
-						l.setVisible(true);
 
-					}
-				});
-				btnLogout.setHorizontalAlignment(SwingConstants.RIGHT);
-				panel.add(btnLogout);
+		JButton btnLogout = new JButton("Cerrar sesi\u00F3n");
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				Login l = new Login();
+				ImageIcon img = new ImageIcon("deusto_LOGIN.png");
+				l.setIconImage(img.getImage());
+				l.setResizable(false);
+				l.setSize(550, 80);
+				l.setAdmin(false);
+				l.setVisible(true);
+
+			}
+		});
+		btnLogout.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel.add(btnLogout);
 		final JLabel labelBanner = new JLabel();
 		final ImageIcon[] icons = { new ImageIcon("BANNER LQ.jpg"), new ImageIcon("DEUSTO2LQ.jpg") };
 		labelBanner.setIcon(icons[0]);
-		
+
 		timer.scheduleAtFixedRate(new TimerTask() {
-			  @Override
-			  public void run() {
-			    labelBanner.setIcon(icons[1]);
-			    try {
+			@Override
+			public void run() {
+				labelBanner.setIcon(icons[1]);
+				try {
 					Thread.sleep(6000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-			    labelBanner.setIcon(icons[0]);
-			  }
-			}, 10*1000, 10*1000);
+				labelBanner.setIcon(icons[0]);
+			}
+		}, 10 * 1000, 10 * 1000);
 		labelBanner.setSize(700, 300);
 		panel.add(labelBanner);
 
@@ -78,8 +129,12 @@ public class Ventana extends JFrame {
 		JLabel lblMarca = new JLabel("Marca: ");
 		panel_4.add(lblMarca);
 
-		final JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] { "BMW", "Audi" }));
+
+		Set<java.util.Map.Entry<String, Coche>> hashSet=Coche.mapaCoches.entrySet();
+        for(java.util.Map.Entry<String, Coche> entry:hashSet ) {
+        	comboBox.addItem(new ObjetoCombobox(0, entry.getValue().getMarca().toString()));
+        }
+
 		panel_4.add(comboBox);
 
 		final JLabel icMarca = new JLabel("");
@@ -97,8 +152,11 @@ public class Ventana extends JFrame {
 		comboBox_1.setEnabled(true);
 		ActionListener cbActionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				String s = (String) comboBox.getSelectedItem();
+//				Set<java.util.Map.Entry<String, Coche>> hashSet2=Coche.mapaCoches.entrySet();
+//		        for(java.util.Map.Entry<String, Coche> entry:hashSet2 ) {
+//		        	comboBox_1.addItem(new ObjetoCombobox(0, entry.getValue().getModelo().toString()));
+//		        }
+				String s = (String) comboBox.getSelectedItem().toString();
 				switch (s) {
 				case "BMW":
 					comboBox_1.setEnabled(true);
@@ -184,7 +242,6 @@ public class Ventana extends JFrame {
 		JLabel lblNewLabel = new JLabel("Puertas: ");
 		panel_8.add(lblNewLabel);
 
-		final JComboBox cbPuertas = new JComboBox();
 		cbPuertas.setModel(new DefaultComboBoxModel(new String[] { "3", "5" }));
 		panel_8.add(cbPuertas);
 
@@ -194,7 +251,6 @@ public class Ventana extends JFrame {
 		JLabel lblPlazas = new JLabel("Plazas: ");
 		panel_10.add(lblPlazas);
 
-		final JComboBox cbPlazas = new JComboBox();
 		cbPlazas.setModel(new DefaultComboBoxModel(new String[] { "2", "5", "7" }));
 		panel_10.add(cbPlazas);
 
@@ -286,7 +342,6 @@ public class Ventana extends JFrame {
 		btnWeb.setVisible(false);
 		panel_13.add(btnWeb);
 
-		// System.out.println(comboBox.getSelectedItem().toString());
 		JPanel panel_11 = new JPanel();
 		panel_2.add(panel_11);
 
@@ -317,6 +372,7 @@ public class Ventana extends JFrame {
 			}
 
 		};
+
 		btnComprobar.addActionListener(comprobar);
 		ActionListener precioFinal = new ActionListener() {
 			@Override
@@ -326,6 +382,8 @@ public class Ventana extends JFrame {
 			}
 		};
 		btnCalcularPrecioFinal.addActionListener(precioFinal);
-
+		
 	}
+	
+
 }

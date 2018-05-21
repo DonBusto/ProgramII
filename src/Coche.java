@@ -14,15 +14,14 @@ public class Coche extends Vehiculo {
 	private boolean gps;
 	private boolean lineaDeportiva;
 	public static ArrayList<Coche> coches = new ArrayList<Coche>();
-	public HashMap<String, Coche> mapaCoches = new HashMap<String, Coche>();
-
+	public static HashMap<String, Coche> mapaCoches = new HashMap<String, Coche>();
+	
 	Coche(String marca, String modelo, int potencia, int puertas, int plazas, boolean gps, boolean lineaDeportiva) {
 		super(marca, modelo, potencia);
 		this.setPuertas(puertas);
 		this.plazas = plazas;
 		this.gps = gps;
 		this.lineaDeportiva = lineaDeportiva;
-		mapaCoches.put(marca, this);
 		
 	}
 
@@ -63,7 +62,6 @@ public class Coche extends Vehiculo {
 		}
 		return precioFinal;
 	}
-
 	public static void cargarCoches() {
 		File file = new File("coches.csv");
 		{
@@ -80,7 +78,6 @@ public class Coche extends Vehiculo {
 					boolean lineaDeporArray = Boolean.parseBoolean(dataSplit[6]);
 					Coche c = new Coche(dataSplit[0], dataSplit[1], potenciaArray, puertasArray, plazasArray, gpsArray,
 							lineaDeporArray);
-					System.out.println("Catálogo: ");
 					System.out.println(" Marca: " + dataSplit[0] + " Modelo: " + dataSplit[1] + " Potencia: "
 							+ potenciaArray + " Puertas: " + puertasArray + " Plazas: " + plazasArray + " GPS: "
 							+ gpsArray + " Línea deportiva: " + lineaDeporArray);
@@ -95,9 +92,8 @@ public class Coche extends Vehiculo {
 		}
 	}
 	public static void anadirAHashmap() {
-		
-		for (Coche c : coches) {
-			
+		for (int i = 0; i<Coche.coches.size(); i++) {
+			mapaCoches.put(Coche.coches.get(i).getMarca(), Coche.coches.get(i));
 		}
 	}
 
@@ -182,13 +178,16 @@ public class Coche extends Vehiculo {
 	 * Comprueba si un coche dado existe en la lista c es el Coche a comprobar
 	 * Devuelve true si existe, false si no
 	 */
+ 
+	
 	public static boolean check(Coche c) {
 		for (int i = 0; i < Coche.coches.size(); i++) {
+			
 			if (c.equals(Coche.coches.get(i))) {
 				return true;
 			}
 		}
 		return false;
 	}
-
+	
 }

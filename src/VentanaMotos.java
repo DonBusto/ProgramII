@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +8,8 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.TimerTask;
+import java.util.Timer;
 
 import javax.swing.*;
 
@@ -23,7 +26,24 @@ public class VentanaMotos extends JFrame {
 		
 
 		getContentPane().add(panel, BorderLayout.NORTH);
-		JLabel labelBanner = new JLabel(new ImageIcon("BANNER LQ.jpg"));
+		final JLabel labelBanner = new JLabel();
+		final ImageIcon[] icons = { new ImageIcon("BANNER LQ.jpg"), new ImageIcon("bannermotoslq.jpg") };
+		labelBanner.setIcon(icons[0]);
+		
+		Timer timer = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask() {
+			  @Override
+			  public void run() {
+			    labelBanner.setIcon(icons[1]);
+			    try {
+					Thread.sleep(6000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			    labelBanner.setIcon(icons[0]);
+			  }
+			}, 10*1000, 10*1000);
+		labelBanner.setSize(700, 300);
 		panel.add(labelBanner);
 		
 

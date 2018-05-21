@@ -12,6 +12,7 @@ public class ProgramaPrincipal {
 
 	public static void main(String[] args) {
 		Coche.cargarCoches();
+		Coche.anadirAHashmap();
 		Moto.cargarMotos();
 		Login l = new Login();
 		ImageIcon img = new ImageIcon("deusto_LOGIN.png");

@@ -242,7 +242,8 @@ public class Login extends JFrame {
 			ImageIcon img = new ImageIcon("deusto_COCHES.png");
 			vAd.setIconImage(img.getImage());
 			vAd.setTitle("Opción de añadir coche");
-			vAd.setBounds(500, 500, 230, 300);
+			vAd.setBounds(500, 500, 270, 300);
+			vAd.setResizable(false);
 			if (admin == true) {
 				vAd.setVisible(true);
 			} else {

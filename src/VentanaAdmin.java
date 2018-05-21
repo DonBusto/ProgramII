@@ -148,6 +148,20 @@ public class VentanaAdmin extends JFrame {
 		gbc_chckbxLneaDeportiva.gridx = 1;
 		gbc_chckbxLneaDeportiva.gridy = 5;
 		getContentPane().add(chckbxLneaDeportiva, gbc_chckbxLneaDeportiva);
+		
+		JButton btnAadirOtroCoche = new JButton("A\u00F1adir otro coche");
+		btnAadirOtroCoche.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentAnadirCoche vAnadirC = new VentAnadirCoche();
+				vAnadirC.setVisible(true);
+				dispose();
+			}
+		});
+		GridBagConstraints gbc_btnAadirOtroCoche = new GridBagConstraints();
+		gbc_btnAadirOtroCoche.insets = new Insets(0, 0, 5, 5);
+		gbc_btnAadirOtroCoche.gridx = 0;
+		gbc_btnAadirOtroCoche.gridy = 6;
+		getContentPane().add(btnAadirOtroCoche, gbc_btnAadirOtroCoche);
 
 		final JLabel lblNoPuedesAadir = new JLabel("No puedes a\u00F1adir coches.");
 		GridBagConstraints gbc_lblNoPuedesAadir = new GridBagConstraints();
@@ -223,7 +237,7 @@ public class VentanaAdmin extends JFrame {
 		};
 		btnAadirCoche.addActionListener(anadirCoche);
 		getContentPane().add(btnAadirCoche, gbc_btnAadirCoche);
-
+		
 	}
 
 }
