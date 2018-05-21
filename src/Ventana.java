@@ -152,10 +152,10 @@ public class Ventana extends JFrame {
 		comboBox_1.setEnabled(true);
 		ActionListener cbActionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				Set<java.util.Map.Entry<String, Coche>> hashSet2=Coche.mapaCoches.entrySet();
-//		        for(java.util.Map.Entry<String, Coche> entry:hashSet2 ) {
-//		        	comboBox_1.addItem(new ObjetoCombobox(0, entry.getValue().getModelo().toString()));
-//		        }
+				Set<java.util.Map.Entry<String, Coche>> hashSet2=Coche.mapaCoches.entrySet();
+		        for(java.util.Map.Entry<String, Coche> entry:hashSet2 ) {
+		        	comboBox_1.addItem(new ObjetoCombobox(0, entry.getValue().getModelo().toString()));
+		        }
 				String s = (String) comboBox.getSelectedItem().toString();
 				switch (s) {
 				case "BMW":
@@ -177,7 +177,7 @@ public class Ventana extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String s = (String) comboBox_1.getSelectedItem();
+				String s = comboBox_1.getSelectedItem().toString();
 				switch (s) {
 				case "A1":
 					icModelo.setIcon(new ImageIcon("a1ok.png"));
