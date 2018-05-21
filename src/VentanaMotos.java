@@ -12,16 +12,20 @@ import javax.swing.*;
 
 public class VentanaMotos extends JFrame {
 	private JTextField tfPotencia;
-	
+
 	private Moto m;
+
 	public VentanaMotos() {
-		
+
 		ImageIcon img = new ImageIcon("deusto.png");
 		setIconImage(img.getImage());
 		JPanel panel = new JPanel();
+		
 
 		getContentPane().add(panel, BorderLayout.NORTH);
-		panel.add(new JLabel(new ImageIcon("BANNER LQ.jpg")));
+		JLabel labelBanner = new JLabel(new ImageIcon("BANNER LQ.jpg"));
+		panel.add(labelBanner);
+		
 
 		JPanel panel_1 = new JPanel();
 		getContentPane().add(panel_1, BorderLayout.CENTER);
@@ -73,7 +77,8 @@ public class VentanaMotos extends JFrame {
 					comboBox_1.setEnabled(true);
 					icMarca.setIcon(new ImageIcon("suzuki.png"));
 					icMarca.setEnabled(true);
-					comboBox_1.setModel(new DefaultComboBoxModel(new String[] { "Address", "Burgman", "IntruderC800" }));
+					comboBox_1
+							.setModel(new DefaultComboBoxModel(new String[] { "Address", "Burgman", "IntruderC800" }));
 				}
 			};
 		};
@@ -129,7 +134,7 @@ public class VentanaMotos extends JFrame {
 			@Override
 			public void keyTyped(KeyEvent evt) {
 				char c = evt.getKeyChar();
-				if(!(Character.isDigit(c)||(c == KeyEvent.VK_BACK_SPACE)||(c == KeyEvent.VK_DELETE))) {
+				if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
 					evt.consume();
 				}
 			}
@@ -161,7 +166,7 @@ public class VentanaMotos extends JFrame {
 		tfPeso.setColumns(3);
 		panel_10.add(tfPeso);
 		tfCilindrada.setColumns(3);
-		
+
 		final JCheckBox chckbxEqMusica = new JCheckBox("Equipo de música");
 		panel_7.add(chckbxEqMusica);
 
@@ -186,13 +191,15 @@ public class VentanaMotos extends JFrame {
 		final JLabel lblElCocheNo = new JLabel("El coche no existe.");
 		lblElCocheNo.setVisible(false);
 		panel_13.add(lblElCocheNo);
-		
+
 		final JButton btnWeb = new JButton("Visitar p\u00E1gina web");
 		btnWeb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if((comboBox_1.getSelectedItem().toString()).equals("1400GTR")){
+				if ((comboBox_1.getSelectedItem().toString()).equals("1400GTR")) {
 					try {
-						Desktop.getDesktop().browse(new URL("https://www.kawasaki.es/es/products/Sport_Tourer/2016/1400GTR/overview?Uid=0821DQxdXFpYCl1aWl9dXFpbWwleXAlQDFBbXwkOWVlYDVo").toURI());
+						Desktop.getDesktop().browse(new URL(
+								"https://www.kawasaki.es/es/products/Sport_Tourer/2016/1400GTR/overview?Uid=0821DQxdXFpYCl1aWl9dXFpbWwleXAlQDFBbXwkOWVlYDVo")
+										.toURI());
 					} catch (IOException | URISyntaxException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -200,7 +207,9 @@ public class VentanaMotos extends JFrame {
 				}
 				if ((comboBox_1.getSelectedItem().toString()).equals("J125ABS")) {
 					try {
-						Desktop.getDesktop().browse(new URL("https://www.kawasaki.es/es/products/Scooter/2017/J125/overview?Uid=0960DlELDVheDQ4LWVteXAlRCgpcXFxeDA0JDV5RDlsKUV0").toURI());
+						Desktop.getDesktop().browse(new URL(
+								"https://www.kawasaki.es/es/products/Scooter/2017/J125/overview?Uid=0960DlELDVheDQ4LWVteXAlRCgpcXFxeDA0JDV5RDlsKUV0")
+										.toURI());
 					} catch (IOException | URISyntaxException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -208,7 +217,9 @@ public class VentanaMotos extends JFrame {
 				}
 				if ((comboBox_1.getSelectedItem().toString()).equals("KX250F")) {
 					try {
-						Desktop.getDesktop().browse(new URL("https://www.kawasaki.es/es/products/Motocross/2018/KX250F/overview?Uid=08F2Dg4KUApRWA1eXQxRXA5ZDApdDVlaWgpZCQpaUVxfXFw").toURI());
+						Desktop.getDesktop().browse(new URL(
+								"https://www.kawasaki.es/es/products/Motocross/2018/KX250F/overview?Uid=08F2Dg4KUApRWA1eXQxRXA5ZDApdDVlaWgpZCQpaUVxfXFw")
+										.toURI());
 					} catch (IOException | URISyntaxException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -216,7 +227,9 @@ public class VentanaMotos extends JFrame {
 				}
 				if ((comboBox_1.getSelectedItem().toString()).equals("Address")) {
 					try {
-						Desktop.getDesktop().browse(new URL("https://moto.suzuki.es/motos/scooter/2018/address/ficha-tecnica/?ib_comercializa=1").toURI());
+						Desktop.getDesktop().browse(new URL(
+								"https://moto.suzuki.es/motos/scooter/2018/address/ficha-tecnica/?ib_comercializa=1")
+										.toURI());
 					} catch (IOException | URISyntaxException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -224,7 +237,9 @@ public class VentanaMotos extends JFrame {
 				}
 				if ((comboBox_1.getSelectedItem().toString()).equals("Burgman")) {
 					try {
-						Desktop.getDesktop().browse(new URL("https://moto.suzuki.es/motos/scooter/2017/burgman-400/ficha-tecnica/?ib_comercializa=1").toURI());
+						Desktop.getDesktop().browse(new URL(
+								"https://moto.suzuki.es/motos/scooter/2017/burgman-400/ficha-tecnica/?ib_comercializa=1")
+										.toURI());
 					} catch (IOException | URISyntaxException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -232,7 +247,9 @@ public class VentanaMotos extends JFrame {
 				}
 				if ((comboBox_1.getSelectedItem().toString()).equals("IntruderC800")) {
 					try {
-						Desktop.getDesktop().browse(new URL("https://moto.suzuki.es/motos/cruiser/2015/intruder-c800/ficha-tecnica/?ib_comercializa=1").toURI());
+						Desktop.getDesktop().browse(new URL(
+								"https://moto.suzuki.es/motos/cruiser/2015/intruder-c800/ficha-tecnica/?ib_comercializa=1")
+										.toURI());
 					} catch (IOException | URISyntaxException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -240,7 +257,7 @@ public class VentanaMotos extends JFrame {
 				}
 			}
 		});
-		
+
 		btnWeb.setVisible(false);
 		panel_13.add(btnWeb);
 
@@ -257,12 +274,11 @@ public class VentanaMotos extends JFrame {
 				l.setResizable(false);
 				l.setSize(550, 80);
 				l.setVisible(true);
-				l.setAdmin(false);				
+				l.setAdmin(false);
 			}
 		});
 		btnLogout.setVisible(true);
 		btnLogout.setHorizontalAlignment(SwingConstants.RIGHT);
-			
 
 		ActionListener comprobar = new ActionListener() {
 
@@ -270,10 +286,8 @@ public class VentanaMotos extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					m = new Moto((comboBox.getSelectedItem().toString()), (comboBox_1.getSelectedItem().toString()),
-							Integer.parseInt(tfPotencia.getText()),
-							Integer.parseInt(tfCilindrada.getText()),
-							Integer.parseInt(tfPeso.getText()),
-							chckbxEqMusica.isSelected());
+							Integer.parseInt(tfPotencia.getText()), Integer.parseInt(tfCilindrada.getText()),
+							Integer.parseInt(tfPeso.getText()), chckbxEqMusica.isSelected());
 				} catch (NullPointerException e) {
 					e.printStackTrace();
 				}
@@ -300,7 +314,6 @@ public class VentanaMotos extends JFrame {
 			}
 		};
 		btnCalcularPrecioFinal.addActionListener(precioFinal);
-		};
-	
+	};
 
 }

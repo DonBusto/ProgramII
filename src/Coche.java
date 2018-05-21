@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Coche extends Vehiculo {
@@ -13,6 +14,7 @@ public class Coche extends Vehiculo {
 	private boolean gps;
 	private boolean lineaDeportiva;
 	public static ArrayList<Coche> coches = new ArrayList<Coche>();
+	public HashMap<String, Coche> mapaCoches = new HashMap<String, Coche>();
 
 	Coche(String marca, String modelo, int potencia, int puertas, int plazas, boolean gps, boolean lineaDeportiva) {
 		super(marca, modelo, potencia);
@@ -20,6 +22,8 @@ public class Coche extends Vehiculo {
 		this.plazas = plazas;
 		this.gps = gps;
 		this.lineaDeportiva = lineaDeportiva;
+		mapaCoches.put(marca, this);
+		
 	}
 
 	private int comprobarPuertas(int puertas) {
@@ -81,12 +85,19 @@ public class Coche extends Vehiculo {
 							+ potenciaArray + " Puertas: " + puertasArray + " Plazas: " + plazasArray + " GPS: "
 							+ gpsArray + " Línea deportiva: " + lineaDeporArray);
 					coches.add(c);
+					
 				}
 				inputStream.close();
 
 			} catch (FileNotFoundException e) {
 
 			}
+		}
+	}
+	public static void anadirAHashmap() {
+		
+		for (Coche c : coches) {
+			
 		}
 	}
 

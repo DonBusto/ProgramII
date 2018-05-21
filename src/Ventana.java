@@ -8,35 +8,57 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.TimerTask;
+import java.util.Timer;
 
 public class Ventana extends JFrame {
 	private JTextField tfPotencia;
 	private Coche c;
+	public Timer timer = new Timer();
 
 	public Ventana() {
+
 		ImageIcon img = new ImageIcon("deusto.png");
+
 		setIconImage(img.getImage());
 		JPanel panel = new JPanel();
 
 		getContentPane().add(panel, BorderLayout.NORTH);
+		
+				JButton btnLogout = new JButton("Cerrar sesi\u00F3n");
+				btnLogout.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						dispose();
+						Login l = new Login();
+						ImageIcon img = new ImageIcon("deusto_LOGIN.png");
+						l.setIconImage(img.getImage());
+						l.setResizable(false);
+						l.setSize(550, 80);
+						l.setAdmin(false);
+						l.setVisible(true);
 
-		JButton btnLogout = new JButton("Cerrar sesi\u00F3n");
-		btnLogout.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dispose();
-				Login l = new Login();
-				ImageIcon img = new ImageIcon("deusto_LOGIN.png");
-				l.setIconImage(img.getImage());
-				l.setResizable(false);
-				l.setSize(550, 80);
-				l.setAdmin(false);
-				l.setVisible(true);
-
-			}
-		});
-		btnLogout.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel.add(btnLogout);
-		panel.add(new JLabel(new ImageIcon("BANNER LQ.jpg")));
+					}
+				});
+				btnLogout.setHorizontalAlignment(SwingConstants.RIGHT);
+				panel.add(btnLogout);
+		final JLabel labelBanner = new JLabel();
+		final ImageIcon[] icons = { new ImageIcon("BANNER LQ.jpg"), new ImageIcon("DEUSTO2LQ.jpg") };
+		labelBanner.setIcon(icons[0]);
+		
+		timer.scheduleAtFixedRate(new TimerTask() {
+			  @Override
+			  public void run() {
+			    labelBanner.setIcon(icons[1]);
+			    try {
+					Thread.sleep(6000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			    labelBanner.setIcon(icons[0]);
+			  }
+			}, 10*1000, 10*1000);
+		labelBanner.setSize(700, 300);
+		panel.add(labelBanner);
 
 		JPanel panel_1 = new JPanel();
 		getContentPane().add(panel_1, BorderLayout.CENTER);
@@ -145,12 +167,12 @@ public class Ventana extends JFrame {
 			@Override
 			public void keyTyped(KeyEvent evt) {
 				char c = evt.getKeyChar();
-				if(!(Character.isDigit(c)||(c == KeyEvent.VK_BACK_SPACE)||(c == KeyEvent.VK_DELETE))) {
+				if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
 					evt.consume();
 				}
 			}
 		});
-		
+
 		JPanel panel_7 = new JPanel();
 		panel_2.add(panel_7);
 		panel_7.setSize(429, 33);
@@ -304,15 +326,6 @@ public class Ventana extends JFrame {
 			}
 		};
 		btnCalcularPrecioFinal.addActionListener(precioFinal);
-	};
 
-	private class SwingAction extends AbstractAction {
-		public SwingAction() {
-			putValue(NAME, "SwingAction");
-			putValue(SHORT_DESCRIPTION, "Some short description");
-		}
-
-		public void actionPerformed(ActionEvent e) {
-		}
 	}
 }

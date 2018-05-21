@@ -252,7 +252,6 @@ public class Login extends JFrame {
 			vc.setSize(700, 350);
 			vc.setResizable(false);
 			vc.setVisible(true);
-
 			dispose();
 		}
 	};
