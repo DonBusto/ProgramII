@@ -62,6 +62,9 @@ public class Coche extends Vehiculo {
 		}
 		return precioFinal;
 	}
+	
+	public float precio = precioFinal();
+	
 	public static void cargarCoches() {
 		File file = new File("coches.csv");
 		{
@@ -76,6 +79,7 @@ public class Coche extends Vehiculo {
 					int plazasArray = Integer.parseInt(dataSplit[4]);
 					boolean gpsArray = Boolean.parseBoolean(dataSplit[5]);
 					boolean lineaDeporArray = Boolean.parseBoolean(dataSplit[6]);
+					float precioArray = Float.parseFloat(dataSplit[7]);
 					Coche c = new Coche(dataSplit[0], dataSplit[1], potenciaArray, puertasArray, plazasArray, gpsArray,
 							lineaDeporArray);
 					System.out.println(" Marca: " + dataSplit[0] + " Modelo: " + dataSplit[1] + " Potencia: "

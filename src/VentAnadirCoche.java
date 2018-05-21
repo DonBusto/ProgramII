@@ -117,6 +117,8 @@ public class VentAnadirCoche extends JFrame {
 						bw.write(';');
 						bw.write(String.valueOf(chckbxLneaDeportiva.isSelected()));
 						bw.write(';');
+						bw.write(String.valueOf(tfPrecioBase.getText()));
+						Vehiculo.setPrecioBase(Integer.parseInt(tfPrecioBase.getText()));
 						bw.write('\n');
 						bw.close();
 						Coche.cargarCoches(); // Volvemos a cargar los elementos del Arraylist

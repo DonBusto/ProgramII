@@ -1,3 +1,5 @@
+import java.io.File;
+import java.util.Scanner;
 
 public class Vehiculo {
 	private String marca;
@@ -28,6 +30,18 @@ public class Vehiculo {
 	}
 
 
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+
+	public void setPotencia(int potencia) {
+		this.potencia = potencia;
+	}
+
+	public static void setPrecioBase(int precioBase) {
+		Vehiculo.precioBase = precioBase;
+	}
+
 	Vehiculo(String marca, String modelo, int potencia){
 		this.marca = marca;
 		this.modelo = modelo;
@@ -35,7 +49,21 @@ public class Vehiculo {
 	}
 	
 	public float precioPotencia(){
+		
 		float precioPotencia = getPrecioBase();
+//		try {
+//			Scanner inputStream = new Scanner(new File("coches.csv"));
+//			while (inputStream.hasNext()) {
+//				String data = inputStream.next();
+//				String[] dataSplit = data.split(";");
+//				precioPotencia = Float.parseFloat(dataSplit[7]);
+//				
+//			}
+//			inputStream.close();
+//
+//		} catch (Exception e) {
+//
+//		}
 		if (potencia > 0 && potencia < 40){
 			precioPotencia+=250;
 		}
@@ -59,7 +87,7 @@ public class Vehiculo {
 		}
 		return precioPotencia;
 	}
-	float precioFinal() {
+	public float precioFinal() {
 		//Ahora, en función del modelo, sumaremos un precio a cada uno.
 		float precioModelo = precioPotencia();
 		if(marca=="BMW"&&modelo == "Serie3") {
@@ -80,6 +108,7 @@ public class Vehiculo {
 		if(marca=="Audi"&&modelo == "A8") {
 			precioModelo+=97000;
 		}
+		//comentamos la parte de coches porque lo hemos hecho de otra forma.
 		if(marca=="Kawasaki"&&modelo == "1400GTR") {
 			precioModelo+=12000;
 		}
@@ -137,7 +166,7 @@ public class Vehiculo {
 			return false;
 		return true;
 	}
-
+	
 
 
 	

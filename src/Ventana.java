@@ -133,6 +133,7 @@ public class Ventana extends JFrame {
 		Set<java.util.Map.Entry<String, Coche>> hashSet=Coche.mapaCoches.entrySet();
         for(java.util.Map.Entry<String, Coche> entry:hashSet ) {
         	comboBox.addItem(new ObjetoCombobox(0, entry.getValue().getMarca().toString()));
+        	
         }
 
 		panel_4.add(comboBox);
