@@ -14,6 +14,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.security.KeyStore.Entry;
 import java.util.TimerTask;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.Timer;
@@ -181,14 +182,26 @@ public class Ventana extends JFrame {
 				Set<java.util.Map.Entry<String, Coche>> hashSet2 = Coche.mapaCoches.entrySet();
 				for (java.util.Map.Entry<String, Coche> entry : hashSet2) {
 					Vehiculo v = new Vehiculo(entry.getValue().getMarca(), entry.getValue().getModelo());
+//					if (v.getMarca().equals(comboBox.getSelectedItem().toString())) {
+//						for (int i = 0; i < Vehiculo.marcasModelos.size(); i++) {
+//							if (Vehiculo.marcasModelos.get(i).getMarca()
+//									.equals(comboBox.getSelectedItem().toString())) {
+//								indexActual = comboBox.getSelectedIndex();
+//								comboBox_1.addItem(new ObjetoCombobox(0, Vehiculo.marcasModelos.get(i).getModelo()));
+//							}
+//						}
+//					}
 					if (v.getMarca().equals(comboBox.getSelectedItem().toString())) {
+						ArrayList <String> arrModelos = new ArrayList <String>();
 						for (int i = 0; i < Vehiculo.marcasModelos.size(); i++) {
 							if (Vehiculo.marcasModelos.get(i).getMarca()
 									.equals(comboBox.getSelectedItem().toString())) {
-								comboBox_1.addItem(new ObjetoCombobox(0, Vehiculo.marcasModelos.get(i).getModelo()));
+								indexActual = comboBox.getSelectedIndex();
+								arrModelos.add(Vehiculo.marcasModelos.get(i).getModelo());
+//								comboBox_1.addItem(new ObjetoCombobox(0, Vehiculo.marcasModelos.get(i).getModelo()));
 							}
+							comboBox_1.setModel(new DefaultComboBoxModel(arrModelos.toArray()));
 						}
-						indexActual = comboBox.getSelectedIndex();
 					}
 				}
 				if (indexActual != comboBox.getSelectedIndex()) {
