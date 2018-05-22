@@ -174,7 +174,7 @@ public class Ventana extends JFrame {
 		panel_5.add(lblModelo);
 
 		final JComboBox comboBox_1 = new JComboBox();
-
+		final JLabel icModelo = new JLabel("");
 		comboBox_1.setEnabled(true);
 		ActionListener cbActionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -211,20 +211,31 @@ public class Ventana extends JFrame {
 				switch (s) {
 				case "BMW":
 					comboBox_1.setEnabled(true);
+					icMarca.setVisible(true);
 					icMarca.setIcon(new ImageIcon("bmw.png"));
 					icMarca.setEnabled(true);
 					comboBox_1.setModel(new DefaultComboBoxModel(new String[] { "Serie3", "Serie5", "Serie7" }));
 					break;
 				case "Audi":
 					comboBox_1.setEnabled(true);
+					icMarca.setVisible(true);
 					icMarca.setIcon(new ImageIcon("audi.png"));
 					icMarca.setEnabled(true);
 					comboBox_1.setModel(new DefaultComboBoxModel(new String[] { "A1", "A4", "A8" }));
-
+					break;
+				default:
+					icMarca.setIcon(null);
 				}
+				
+					
 			};
 		};
-		final JLabel icModelo = new JLabel("");
+//		if (!(comboBox.getSelectedItem().toString().equals("BMW")||comboBox.getSelectedItem().toString().equals("Audi"))) {
+//			icMarca.setVisible(false);	
+//			icMarca.setEnabled(false);
+//			icModelo.setVisible(false);
+//			icModelo.setEnabled(false);
+//		}
 		ActionListener modActionListener = new ActionListener() {
 
 			@Override
