@@ -2,6 +2,7 @@ import javax.swing.*;
 
 import java.awt.BorderLayout;
 import java.awt.Desktop;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -18,6 +19,7 @@ import java.util.Set;
 import java.util.Timer;
 
 public class Ventana extends JFrame {
+	
 	public String marcaCB;
 	public String modeloCB;
 	private JTextField tfPotencia;
@@ -175,8 +177,8 @@ public class Ventana extends JFrame {
 		comboBox_1.setEnabled(true);
 		ActionListener cbActionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int indexActual = 0;
 				Set<java.util.Map.Entry<String, Coche>> hashSet2 = Coche.mapaCoches.entrySet();
-				comboBox_1.removeAllItems();
 				for (java.util.Map.Entry<String, Coche> entry : hashSet2) {
 					Vehiculo v = new Vehiculo(entry.getValue().getMarca(), entry.getValue().getModelo());
 					if (v.getMarca().equals(comboBox.getSelectedItem().toString())) {
@@ -186,7 +188,11 @@ public class Ventana extends JFrame {
 								comboBox_1.addItem(new ObjetoCombobox(0, Vehiculo.marcasModelos.get(i).getModelo()));
 							}
 						}
+						indexActual = comboBox.getSelectedIndex();
 					}
+				}
+				if (indexActual != comboBox.getSelectedIndex()) {
+					comboBox_1.removeAllItems();
 				}
 				String s = (String) comboBox.getSelectedItem().toString();
 				switch (s) {
@@ -236,6 +242,8 @@ public class Ventana extends JFrame {
 					icModelo.setIcon(new ImageIcon("serie7.png"));
 					icModelo.setEnabled(true);
 					break;
+				default:
+					icModelo.setEnabled(false);
 				}
 			}
 		};

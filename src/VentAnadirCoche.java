@@ -15,6 +15,7 @@ public class VentAnadirCoche extends JFrame {
 	private JTextField tfIcono;
 
 	public VentAnadirCoche() {
+		setResizable(false);
 		ImageIcon img = new ImageIcon("deusto_COCHES.png");
 		setIconImage(img.getImage());
 		setTitle("Añadir coche diferente al catálogo");
@@ -70,7 +71,7 @@ public class VentAnadirCoche extends JFrame {
 		getContentPane().add(cbPlazas);
 
 		final JLabel lblNoTienesPermiso = new JLabel("No tienes permiso.");
-		lblNoTienesPermiso.setBounds(33, 276, 181, 24);
+		lblNoTienesPermiso.setBounds(0, 276, 186, 24);
 		lblNoTienesPermiso.setVisible(false);
 		getContentPane().add(lblNoTienesPermiso);
 
@@ -90,7 +91,12 @@ public class VentAnadirCoche extends JFrame {
 		JLabel lblPrecioBase = new JLabel("Precio base:");
 		lblPrecioBase.setBounds(0, 211, 94, 16);
 		getContentPane().add(lblPrecioBase);
-
+		
+		final JLabel lblCocheAadidoCon = new JLabel("Coche a\u00F1adido con \u00E9xito.");
+		lblCocheAadidoCon.setBounds(0, 301, 186, 16);
+		lblCocheAadidoCon.setVisible(false);
+		getContentPane().add(lblCocheAadidoCon);
+		
 		JLabel label = new JLabel("\u20AC");
 		label.setBounds(158, 211, 56, 16);
 		getContentPane().add(label);
@@ -105,7 +111,7 @@ public class VentAnadirCoche extends JFrame {
 																							// vamos añadiendo coches
 																							// nuevos.
 						BufferedWriter bw = new BufferedWriter(writer);
-						if(!(tfMarca.getText().equals("BMW")||tfMarca.getText().equals("Audi"))) {
+						if (!(tfMarca.getText().equals("BMW") || tfMarca.getText().equals("Audi"))) {
 							bw.write(String.valueOf(tfMarca.getText()));
 							bw.write(';');
 							bw.write(String.valueOf(tfModelo.getText()));
@@ -124,13 +130,17 @@ public class VentAnadirCoche extends JFrame {
 							Vehiculo.setPrecioBase(Integer.parseInt(tfPrecioBase.getText()));
 							bw.write('\n');
 							bw.close();
+							lblNoTienesPermiso.setText("Reinicie sesión para actualizar.");
+							lblNoTienesPermiso.setVisible(true);
+							lblCocheAadidoCon.setVisible(true);
 						} else {
 							lblNoTienesPermiso.setText("Añádelo en la otra ventana.");
 							lblNoTienesPermiso.setVisible(true);
+							lblCocheAadidoCon.setVisible(false);
 						}
-						
+
 						Coche.cargarCoches(); // Volvemos a cargar los elementos del Arraylist
-						Coche.anadirAHashmap(); //Cargamos el HashMap de nuevo
+						Coche.anadirAHashmap(); // Cargamos el HashMap de nuevo
 					} catch (Exception ee) {
 
 					}
@@ -138,6 +148,7 @@ public class VentAnadirCoche extends JFrame {
 					setSize(220, 360);
 					lblNoTienesPermiso.setText("No tienes permiso.");
 					lblNoTienesPermiso.setVisible(true);
+					lblCocheAadidoCon.setVisible(false);
 				}
 			}
 		});
@@ -168,10 +179,10 @@ public class VentAnadirCoche extends JFrame {
 					File fichero = fc.getSelectedFile();
 					tfIcono.setText(fichero.getAbsolutePath());
 				}
-				
+
 				fc.setBounds(600, 100, 600, 300);
 				fc.setVisible(true);
-				
+
 			}
 		});
 		btnElegir.setBounds(129, 32, 57, 25);
