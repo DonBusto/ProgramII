@@ -13,6 +13,7 @@ public class Coche extends Vehiculo {
 	private int plazas;
 	private boolean gps;
 	private boolean lineaDeportiva;
+	private float precioBase;
 	public static ArrayList<Coche> coches = new ArrayList<Coche>();
 	public static HashMap<String, Coche> mapaCoches = new HashMap<String, Coche>();
 	
@@ -23,6 +24,15 @@ public class Coche extends Vehiculo {
 		this.gps = gps;
 		this.lineaDeportiva = lineaDeportiva;
 		
+	}
+	
+	Coche(String marca, String modelo, int potencia, int puertas, int plazas, boolean gps, boolean lineaDeportiva, float precioBase) {
+		super(marca, modelo, potencia);
+		this.setPuertas(puertas);
+		this.plazas = plazas;
+		this.gps = gps;
+		this.lineaDeportiva = lineaDeportiva;
+		this.precioBase = precioBase;
 	}
 
 	private int comprobarPuertas(int puertas) {
@@ -65,6 +75,14 @@ public class Coche extends Vehiculo {
 	
 	public float precio = precioFinal();
 	
+	public float getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(float precio) {
+		this.precio = precio;
+	}
+
 	public static void cargarCoches() {
 		File file = new File("coches.csv");
 		{
@@ -81,7 +99,7 @@ public class Coche extends Vehiculo {
 					boolean lineaDeporArray = Boolean.parseBoolean(dataSplit[6]);
 					float precioArray = Float.parseFloat(dataSplit[7]);
 					Coche c = new Coche(dataSplit[0], dataSplit[1], potenciaArray, puertasArray, plazasArray, gpsArray,
-							lineaDeporArray);
+							lineaDeporArray, precioArray);
 					System.out.println(" Marca: " + dataSplit[0] + " Modelo: " + dataSplit[1] + " Potencia: "
 							+ potenciaArray + " Puertas: " + puertasArray + " Plazas: " + plazasArray + " GPS: "
 							+ gpsArray + " Línea deportiva: " + lineaDeporArray);

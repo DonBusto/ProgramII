@@ -17,6 +17,7 @@ public class VentanaAdmin extends JFrame {
 
 	public VentanaAdmin() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -219,6 +220,30 @@ public class VentanaAdmin extends JFrame {
 						bw.write(';');
 						bw.write(String.valueOf(chckbxLneaDeportiva.isSelected()));
 						bw.write(';');
+						if(comboBox_1.getSelectedItem().toString().equals("Serie3")) {
+							bw.write("30000");
+							bw.write(";");
+						}
+						if(comboBox_1.getSelectedItem().toString().equals("Serie5")) {
+							bw.write("52000");
+							bw.write(";");
+						}
+						if(comboBox_1.getSelectedItem().toString().equals("Serie7")) {
+							bw.write("90000");
+							bw.write(";");
+						}
+						if(comboBox_1.getSelectedItem().toString().equals("A1")) {
+							bw.write("15000");
+							bw.write(";");
+						}
+						if(comboBox_1.getSelectedItem().toString().equals("A4")) {
+							bw.write("24000");
+							bw.write(";");
+						}
+						if(comboBox_1.getSelectedItem().toString().equals("A8")) {
+							bw.write("97000");
+							bw.write(";");
+						}
 						bw.write('\n');
 						bw.close();
 						Coche.cargarCoches(); // Volvemos a cargar los elementos del Arraylist

@@ -15,6 +15,9 @@ public class VentAnadirCoche extends JFrame {
 	private JTextField tfIcono;
 
 	public VentAnadirCoche() {
+		ImageIcon img = new ImageIcon("deusto_COCHES.png");
+		setIconImage(img.getImage());
+		setTitle("Añadir coche diferente al catálogo");
 		setSize(223, 393);
 		getContentPane().setLayout(null);
 
@@ -102,25 +105,30 @@ public class VentAnadirCoche extends JFrame {
 																							// vamos añadiendo coches
 																							// nuevos.
 						BufferedWriter bw = new BufferedWriter(writer);
+						if(!(tfMarca.getText().equals("BMW")||tfMarca.getText().equals("Audi"))) {
+							bw.write(String.valueOf(tfMarca.getText()));
+							bw.write(';');
+							bw.write(String.valueOf(tfModelo.getText()));
+							bw.write(';');
+							bw.write(String.valueOf(tfPotencia.getText()));
+							bw.write(';');
+							bw.write(String.valueOf(cbPuertas.getSelectedItem().toString()));
+							bw.write(';');
+							bw.write(String.valueOf(cbPlazas.getSelectedItem().toString()));
+							bw.write(';');
+							bw.write(String.valueOf(chckbxGps.isSelected()));
+							bw.write(';');
+							bw.write(String.valueOf(chckbxLneaDeportiva.isSelected()));
+							bw.write(';');
+							bw.write(String.valueOf(tfPrecioBase.getText()));
+							Vehiculo.setPrecioBase(Integer.parseInt(tfPrecioBase.getText()));
+							bw.write('\n');
+							bw.close();
+						} else {
+							lblNoTienesPermiso.setText("Añádelo en la otra ventana.");
+							lblNoTienesPermiso.setVisible(true);
+						}
 						
-						bw.write(String.valueOf(tfMarca.getText()));
-						bw.write(';');
-						bw.write(String.valueOf(tfModelo.getText()));
-						bw.write(';');
-						bw.write(String.valueOf(tfPotencia.getText()));
-						bw.write(';');
-						bw.write(String.valueOf(cbPuertas.getSelectedItem().toString()));
-						bw.write(';');
-						bw.write(String.valueOf(cbPlazas.getSelectedItem().toString()));
-						bw.write(';');
-						bw.write(String.valueOf(chckbxGps.isSelected()));
-						bw.write(';');
-						bw.write(String.valueOf(chckbxLneaDeportiva.isSelected()));
-						bw.write(';');
-						bw.write(String.valueOf(tfPrecioBase.getText()));
-						Vehiculo.setPrecioBase(Integer.parseInt(tfPrecioBase.getText()));
-						bw.write('\n');
-						bw.close();
 						Coche.cargarCoches(); // Volvemos a cargar los elementos del Arraylist
 						Coche.anadirAHashmap(); //Cargamos el HashMap de nuevo
 					} catch (Exception ee) {
@@ -128,6 +136,7 @@ public class VentAnadirCoche extends JFrame {
 					}
 				} else {
 					setSize(220, 360);
+					lblNoTienesPermiso.setText("No tienes permiso.");
 					lblNoTienesPermiso.setVisible(true);
 				}
 			}

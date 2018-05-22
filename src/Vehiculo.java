@@ -90,25 +90,24 @@ public class Vehiculo {
 	public float precioFinal() {
 		//Ahora, en función del modelo, sumaremos un precio a cada uno.
 		float precioModelo = precioPotencia();
-		if(marca=="BMW"&&modelo == "Serie3") {
-			precioModelo+=30000;
-		}
-		if(marca=="BMW"&&modelo == "Serie5") {
-			precioModelo+=52000;
-		}
-		if(marca=="BMW"&&modelo == "Serie7") {
-			precioModelo+=90000;
-		}
-		if(marca=="Audi"&&modelo == "A1") {
-			precioModelo+=15000;
-		}
-		if(marca=="Audi"&&modelo == "A3") {
-			precioModelo+=24000;
-		}
-		if(marca=="Audi"&&modelo == "A8") {
-			precioModelo+=97000;
-		}
-		//comentamos la parte de coches porque lo hemos hecho de otra forma.
+//		if(marca=="BMW"&&modelo == "Serie3") {
+//			precioModelo+=30000;
+//		}
+//		if(marca=="BMW"&&modelo == "Serie5") {
+//			precioModelo+=52000;
+//		}
+//		if(marca=="BMW"&&modelo == "Serie7") {
+//			precioModelo+=90000;
+//		}
+//		if(marca=="Audi"&&modelo == "A1") {
+//			precioModelo+=15000;
+//		}
+//		if(marca=="Audi"&&modelo == "A3") {
+//			precioModelo+=24000;
+//		}
+//		if(marca=="Audi"&&modelo == "A8") {
+//			precioModelo+=97000;
+//		}
 		if(marca=="Kawasaki"&&modelo == "1400GTR") {
 			precioModelo+=12000;
 		}
