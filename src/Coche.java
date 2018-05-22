@@ -26,6 +26,7 @@ public class Coche extends Vehiculo {
 		
 	}
 	
+	
 	Coche(String marca, String modelo, int potencia, int puertas, int plazas, boolean gps, boolean lineaDeportiva, float precioBase) {
 		super(marca, modelo, potencia);
 		this.setPuertas(puertas);
@@ -100,10 +101,12 @@ public class Coche extends Vehiculo {
 					float precioArray = Float.parseFloat(dataSplit[7]);
 					Coche c = new Coche(dataSplit[0], dataSplit[1], potenciaArray, puertasArray, plazasArray, gpsArray,
 							lineaDeporArray, precioArray);
+					Vehiculo v = new Vehiculo(dataSplit[0], dataSplit[1]);
 					System.out.println(" Marca: " + dataSplit[0] + " Modelo: " + dataSplit[1] + " Potencia: "
 							+ potenciaArray + " Puertas: " + puertasArray + " Plazas: " + plazasArray + " GPS: "
 							+ gpsArray + " Línea deportiva: " + lineaDeporArray);
 					coches.add(c);
+					Vehiculo.marcasModelos.add(v);
 					
 				}
 				inputStream.close();
@@ -204,7 +207,6 @@ public class Coche extends Vehiculo {
 	
 	public static boolean check(Coche c) {
 		for (int i = 0; i < Coche.coches.size(); i++) {
-			
 			if (c.equals(Coche.coches.get(i))) {
 				return true;
 			}

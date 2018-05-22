@@ -151,7 +151,7 @@ public class Ventana extends JFrame {
 
 		JLabel lblMarca = new JLabel("Marca: ");
 		panel_4.add(lblMarca);
-
+		
 		Set<java.util.Map.Entry<String, Coche>> hashSet = Coche.mapaCoches.entrySet();
 		for (java.util.Map.Entry<String, Coche> entry : hashSet) {
 			comboBox.addItem(new ObjetoCombobox(0, entry.getValue().getMarca().toString()));
@@ -175,15 +175,20 @@ public class Ventana extends JFrame {
 		comboBox_1.setEnabled(true);
 		ActionListener cbActionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				Coche.cargarCoches();
 				Set<java.util.Map.Entry<String, Coche>> hashSet2 = Coche.mapaCoches.entrySet();
-				
+
 				comboBox_1.removeAllItems();
-				
 				for (java.util.Map.Entry<String, Coche> entry : hashSet2) {
-					Vehiculo v = new Vehiculo(entry.getValue().getMarca(), entry.getValue().getModelo(), entry.getValue().getPotencia());
-					if(v.getMarca().equals(comboBox.getSelectedItem().toString())) {
-						comboBox_1.addItem(new ObjetoCombobox(0, entry.getValue().getModelo()));
+					Vehiculo v = new Vehiculo(entry.getValue().getMarca(), entry.getValue().getModelo());
+					
+					if (v.getMarca().equals(comboBox.getSelectedItem().toString())) {
+						for(int i = 0; i<Vehiculo.marcasModelos.size(); i++) {
+							if (Vehiculo.marcasModelos.get(i).getMarca().equals(comboBox.getSelectedItem().toString())) {
+								comboBox_1.addItem(new ObjetoCombobox(0, Vehiculo.marcasModelos.get(i).getModelo()));
+							}
+							
+						}
 					}
 				}
 				String s = (String) comboBox.getSelectedItem().toString();
@@ -199,7 +204,7 @@ public class Ventana extends JFrame {
 					icMarca.setIcon(new ImageIcon("audi.png"));
 					icMarca.setEnabled(true);
 					comboBox_1.setModel(new DefaultComboBoxModel(new String[] { "A1", "A4", "A8" }));
-					
+
 				}
 			};
 		};
@@ -409,46 +414,46 @@ public class Ventana extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-						Scanner inputStream = new Scanner(new File("coches.csv"));
-						while (inputStream.hasNext()) {
-							String data = inputStream.next();
-							String[] dataSplit = data.split(";");
-							Coche c = new Coche(comboBox.getSelectedItem().toString(),
-									comboBox_1.getSelectedItem().toString(), Integer.parseInt(tfPotencia.getText()),
-									Integer.parseInt(cbPuertas.getSelectedItem().toString()),
-									Integer.parseInt(cbPlazas.getSelectedItem().toString()), chckbxGps.isSelected(),
-									(chckbxGps.isSelected()));
-							if (Coche.check(c)) {
-								precioB = Float.parseFloat(dataSplit[7]);
-								if (chckbxGps.isSelected()) {
-									precioB *= 1.1;
-								}
-								if (chckbxLneaDeportiva.isSelected()) {
-									precioB *= 1.75;
-								}
-								
+					Scanner inputStream = new Scanner(new File("coches.csv"));
+					while (inputStream.hasNext()) {
+						String data = inputStream.next();
+						String[] dataSplit = data.split(";");
+						Coche c = new Coche(comboBox.getSelectedItem().toString(),
+								comboBox_1.getSelectedItem().toString(), Integer.parseInt(tfPotencia.getText()),
+								Integer.parseInt(cbPuertas.getSelectedItem().toString()),
+								Integer.parseInt(cbPlazas.getSelectedItem().toString()), chckbxGps.isSelected(),
+								(chckbxGps.isSelected()));
+						if (Coche.check(c)) {
+							precioB = Float.parseFloat(dataSplit[7]);
+							if (chckbxGps.isSelected()) {
+								precioB *= 1.1;
 							}
-							if (comboBox.getSelectedItem().toString().equals("BMW")
-									|| comboBox.getSelectedItem().toString().equals("Audi")) {
-								lblElCocheNo.setText("El precio final es de " + (c.precioFinal() + precioB) + " euros.");
-								btnWeb.setVisible(true);
-							} else {
-								lblElCocheNo.setText("El precio final es de " + (c.precioFinal() + precioB) + " euros.");
-								btnWeb.setVisible(false);
+							if (chckbxLneaDeportiva.isSelected()) {
+								precioB *= 1.75;
 							}
+
 						}
-						
-						inputStream.close();
-
-					} catch (Exception e2) {
-
+						if (comboBox.getSelectedItem().toString().equals("BMW")
+								|| comboBox.getSelectedItem().toString().equals("Audi")) {
+							lblElCocheNo.setText("El precio final es de " + (c.precioFinal() + precioB) + " euros.");
+							btnWeb.setVisible(true);
+						} else {
+							lblElCocheNo.setText("El precio final es de " + (c.precioFinal() + precioB) + " euros.");
+							btnWeb.setVisible(false);
+						}
 					}
-				
+
+					inputStream.close();
+
+				} catch (Exception e2) {
+
 				}
 
-			
-		};btnCalcularPrecioFinal.addActionListener(precioFinal);
+			}
 
-}
+		};
+		btnCalcularPrecioFinal.addActionListener(precioFinal);
+
+	}
 
 }
