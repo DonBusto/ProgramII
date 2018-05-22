@@ -151,7 +151,7 @@ public class Ventana extends JFrame {
 
 		JLabel lblMarca = new JLabel("Marca: ");
 		panel_4.add(lblMarca);
-		
+
 		Set<java.util.Map.Entry<String, Coche>> hashSet = Coche.mapaCoches.entrySet();
 		for (java.util.Map.Entry<String, Coche> entry : hashSet) {
 			comboBox.addItem(new ObjetoCombobox(0, entry.getValue().getMarca().toString()));
@@ -175,19 +175,16 @@ public class Ventana extends JFrame {
 		comboBox_1.setEnabled(true);
 		ActionListener cbActionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Coche.cargarCoches();
 				Set<java.util.Map.Entry<String, Coche>> hashSet2 = Coche.mapaCoches.entrySet();
-
 				comboBox_1.removeAllItems();
 				for (java.util.Map.Entry<String, Coche> entry : hashSet2) {
 					Vehiculo v = new Vehiculo(entry.getValue().getMarca(), entry.getValue().getModelo());
-					
 					if (v.getMarca().equals(comboBox.getSelectedItem().toString())) {
-						for(int i = 0; i<Vehiculo.marcasModelos.size(); i++) {
-							if (Vehiculo.marcasModelos.get(i).getMarca().equals(comboBox.getSelectedItem().toString())) {
+						for (int i = 0; i < Vehiculo.marcasModelos.size(); i++) {
+							if (Vehiculo.marcasModelos.get(i).getMarca()
+									.equals(comboBox.getSelectedItem().toString())) {
 								comboBox_1.addItem(new ObjetoCombobox(0, Vehiculo.marcasModelos.get(i).getModelo()));
 							}
-							
 						}
 					}
 				}
