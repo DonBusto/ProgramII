@@ -12,6 +12,8 @@ public class ProgramaPrincipal {
 
 	public static void main(String[] args) {
 		Coche.cargarCoches();
+		Vehiculo.cargarLogos();
+		Vehiculo.anadirAHashmap();
 		Coche.anadirAHashmap();
 		Moto.cargarMotos();
 		Login l = new Login();

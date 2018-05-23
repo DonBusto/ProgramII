@@ -2,11 +2,13 @@ import javax.swing.*;
 
 import java.awt.BorderLayout;
 import java.awt.Desktop;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,7 +22,7 @@ import java.util.Set;
 import java.util.Timer;
 
 public class Ventana extends JFrame {
-	
+
 	public String marcaCB;
 	public String modeloCB;
 	private JTextField tfPotencia;
@@ -180,28 +182,41 @@ public class Ventana extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int indexActual = 0;
 				Set<java.util.Map.Entry<String, Coche>> hashSet2 = Coche.mapaCoches.entrySet();
+				Set<java.util.Map.Entry<String, ImageIcon>> hashSetLogos = Vehiculo.mapaLogos.entrySet();
 				for (java.util.Map.Entry<String, Coche> entry : hashSet2) {
 					Vehiculo v = new Vehiculo(entry.getValue().getMarca(), entry.getValue().getModelo());
-//					if (v.getMarca().equals(comboBox.getSelectedItem().toString())) {
-//						for (int i = 0; i < Vehiculo.marcasModelos.size(); i++) {
-//							if (Vehiculo.marcasModelos.get(i).getMarca()
-//									.equals(comboBox.getSelectedItem().toString())) {
-//								indexActual = comboBox.getSelectedIndex();
-//								comboBox_1.addItem(new ObjetoCombobox(0, Vehiculo.marcasModelos.get(i).getModelo()));
-//							}
-//						}
-//					}
 					if (v.getMarca().equals(comboBox.getSelectedItem().toString())) {
-						ArrayList <String> arrModelos = new ArrayList <String>();
+						ArrayList<String> arrModelos = new ArrayList<String>();
 						for (int i = 0; i < Vehiculo.marcasModelos.size(); i++) {
 							if (Vehiculo.marcasModelos.get(i).getMarca()
 									.equals(comboBox.getSelectedItem().toString())) {
 								indexActual = comboBox.getSelectedIndex();
 								arrModelos.add(Vehiculo.marcasModelos.get(i).getModelo());
-//								comboBox_1.addItem(new ObjetoCombobox(0, Vehiculo.marcasModelos.get(i).getModelo()));
+
 							}
 							comboBox_1.setModel(new DefaultComboBoxModel(arrModelos.toArray()));
 						}
+					}
+				}
+				for (java.util.Map.Entry<String, ImageIcon> entry : hashSetLogos) {
+					Vehiculo v = new Vehiculo(entry.getKey().toString(), entry.getValue());
+					if (v.getMarca().equals(comboBox.getSelectedItem().toString())) {
+						for (int i = 0; i < Vehiculo.marcasModelos.size(); i++) {
+							if (Vehiculo.marcasModelos.get(i).getMarca()
+									.equals(comboBox.getSelectedItem().toString())) {
+								ImageIcon icon = new ImageIcon(entry.getValue().getImage());
+								Image img = icon.getImage();
+								BufferedImage bi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+								Graphics g = bi.createGraphics();
+								g.drawImage(img, 0, 0, 30, 30, null);
+								ImageIcon newIcon = new ImageIcon(bi);
+								icMarca.setIcon(newIcon);
+								icMarca.setEnabled(true);
+								icMarca.setVisible(true);
+							}
+						}
+					} else {
+						icMarca.setIcon(null);
 					}
 				}
 				if (indexActual != comboBox.getSelectedIndex()) {
@@ -224,18 +239,12 @@ public class Ventana extends JFrame {
 					comboBox_1.setModel(new DefaultComboBoxModel(new String[] { "A1", "A4", "A8" }));
 					break;
 				default:
-					icMarca.setIcon(null);
+					// icMarca.setIcon(null);
 				}
-				
-					
+
 			};
 		};
-//		if (!(comboBox.getSelectedItem().toString().equals("BMW")||comboBox.getSelectedItem().toString().equals("Audi"))) {
-//			icMarca.setVisible(false);	
-//			icMarca.setEnabled(false);
-//			icModelo.setVisible(false);
-//			icModelo.setEnabled(false);
-//		}
+
 		ActionListener modActionListener = new ActionListener() {
 
 			@Override

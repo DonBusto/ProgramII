@@ -14,6 +14,7 @@ public class Coche extends Vehiculo {
 	private boolean gps;
 	private boolean lineaDeportiva;
 	private float precioBase;
+	
 	public static ArrayList<Coche> coches = new ArrayList<Coche>();
 	public static HashMap<String, Coche> mapaCoches = new HashMap<String, Coche>();
 	

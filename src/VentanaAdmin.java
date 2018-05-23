@@ -256,10 +256,20 @@ public class VentanaAdmin extends JFrame {
 					lblNoEresAdministrador.setVisible(true);
 					lblNoPuedesAadir.setVisible(true);
 				}
+				
 
 			}
 
 		};
+		tfPotencia.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent evt) {
+				char c = evt.getKeyChar();
+				if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					evt.consume();
+				}
+			}
+		});
 		btnAadirCoche.addActionListener(anadirCoche);
 		getContentPane().add(btnAadirCoche, gbc_btnAadirCoche);
 		

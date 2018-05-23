@@ -2,6 +2,8 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -13,6 +15,7 @@ public class VentAnadirCoche extends JFrame {
 	private JTextField tfPotencia;
 	private JTextField tfPrecioBase;
 	private JTextField tfIcono;
+	public JFileChooser fc = new JFileChooser();
 
 	public VentAnadirCoche() {
 		setResizable(false);
@@ -91,12 +94,12 @@ public class VentAnadirCoche extends JFrame {
 		JLabel lblPrecioBase = new JLabel("Precio base:");
 		lblPrecioBase.setBounds(0, 211, 94, 16);
 		getContentPane().add(lblPrecioBase);
-		
+
 		final JLabel lblCocheAadidoCon = new JLabel("Coche a\u00F1adido con \u00E9xito.");
 		lblCocheAadidoCon.setBounds(0, 301, 186, 16);
 		lblCocheAadidoCon.setVisible(false);
 		getContentPane().add(lblCocheAadidoCon);
-		
+
 		JLabel label = new JLabel("\u20AC");
 		label.setBounds(158, 211, 56, 16);
 		getContentPane().add(label);
@@ -111,7 +114,9 @@ public class VentAnadirCoche extends JFrame {
 																							// vamos añadiendo coches
 																							// nuevos.
 						BufferedWriter bw = new BufferedWriter(writer);
+						Vehiculo v = new Vehiculo(tfMarca.getText(), new ImageIcon(fc.getSelectedFile().toString()));
 						if (!(tfMarca.getText().equals("BMW") || tfMarca.getText().equals("Audi"))) {
+							
 							bw.write(String.valueOf(tfMarca.getText()));
 							bw.write(';');
 							bw.write(String.valueOf(tfModelo.getText()));
@@ -130,17 +135,30 @@ public class VentAnadirCoche extends JFrame {
 							Vehiculo.setPrecioBase(Integer.parseInt(tfPrecioBase.getText()));
 							bw.write('\n');
 							bw.close();
+							if (fc.getSelectedFile().isFile()) {
+								File file2 = new File("iconos.csv");
+								FileWriter writer2 = new FileWriter(file2.getAbsoluteFile(), true);
+								BufferedWriter bw2 = new BufferedWriter(writer2);
+								bw2.write(String.valueOf(tfMarca.getText()));
+								bw2.write(';');
+								bw2.write(String.valueOf(fc.getSelectedFile().toString()));
+								bw2.write("\n");
+								bw2.close();
+							}
 							lblNoTienesPermiso.setText("Reinicie sesión para actualizar.");
 							lblNoTienesPermiso.setVisible(true);
 							lblCocheAadidoCon.setVisible(true);
+							
 						} else {
 							lblNoTienesPermiso.setText("Añádelo en la otra ventana.");
 							lblNoTienesPermiso.setVisible(true);
 							lblCocheAadidoCon.setVisible(false);
 						}
-
-						Coche.cargarCoches(); // Volvemos a cargar los elementos del Arraylist
-						Coche.anadirAHashmap(); // Cargamos el HashMap de nuevo
+						Vehiculo.cargarLogos();
+						Vehiculo.anadirAHashmap();
+						Coche.cargarCoches();
+						System.out.println("a");
+						Coche.anadirAHashmap();
 					} catch (Exception ee) {
 
 					}
@@ -149,6 +167,15 @@ public class VentAnadirCoche extends JFrame {
 					lblNoTienesPermiso.setText("No tienes permiso.");
 					lblNoTienesPermiso.setVisible(true);
 					lblCocheAadidoCon.setVisible(false);
+				}
+			}
+		});
+		tfPotencia.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent evt) {
+				char c = evt.getKeyChar();
+				if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					evt.consume();
 				}
 			}
 		});
@@ -166,7 +193,6 @@ public class VentAnadirCoche extends JFrame {
 		JButton btnElegir = new JButton("...");
 		btnElegir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFileChooser fc = new JFileChooser();
 				FileNameExtensionFilter png = new FileNameExtensionFilter("Imágenes(.png)", ".png");
 				fc.addChoosableFileFilter(png);
 				FileNameExtensionFilter jpg = new FileNameExtensionFilter("Imágenes(.jpg)", ".jpg");

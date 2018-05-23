@@ -1,13 +1,27 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
+
+import javax.swing.ImageIcon;
 
 public class Vehiculo {
 	private String marca;
 	private String modelo;
+	public ImageIcon imgMarca;
 	private int potencia;
 	private static int precioBase = 4000;
 	public static ArrayList<Vehiculo> marcasModelos = new ArrayList<Vehiculo>();
+	public static ArrayList<Vehiculo> logos = new ArrayList<Vehiculo>();
+	public static HashMap<String, ImageIcon> mapaLogos = new HashMap<String, ImageIcon>();
+	public ImageIcon getImgMarca() {
+		return imgMarca;
+	}
+
+	public void setImgMarca(ImageIcon imgMarca) {
+		this.imgMarca = imgMarca;
+	}
 
 	public String getModelo() {
 		return modelo;
@@ -50,6 +64,11 @@ public class Vehiculo {
 	public Vehiculo(String marca, String modelo) {
 		this.marca = marca;
 		this.modelo = modelo;
+	}
+	
+	public Vehiculo(String marca, ImageIcon imgMarca) {
+		this.marca = marca;
+		this.imgMarca = imgMarca;
 	}
 
 	public float precioPotencia() {
@@ -190,5 +209,28 @@ public class Vehiculo {
 		}
 		return false;
 	}
+	public static void cargarLogos() {
+		try {
+			File file = new File("iconos.csv");
+			Scanner inputStream = new Scanner(file);
+			while (inputStream.hasNext()) {
+				String data = inputStream.next();
+				String[] dataSplit = data.split(";");
+				Vehiculo v = new Vehiculo(dataSplit[0], new ImageIcon(dataSplit[1]));
+				Vehiculo.logos.add(v);
+				
+			}
+			inputStream.close();
 
+		} catch (FileNotFoundException e) {
+
+		}
+	}
+	public static void anadirAHashmap() {
+		for (int i = 0; i<Vehiculo.logos.size(); i++) {
+			mapaLogos.put(Vehiculo.logos.get(i).getMarca(), Vehiculo.logos.get(i).getImgMarca());
+		}
+	}
+
+	
 }
